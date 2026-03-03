@@ -1,11 +1,15 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven3'
+    }
+
     stages {
 
         stage('Checkout') {
             steps {
-                git 'YOUR_GITHUB_REPO_URL'
+                git 'https://github.com/Hithes256/Dev_pro.git'
             }
         }
 
@@ -21,11 +25,11 @@ pipeline {
             }
         }
 
-        stage('Docker Run') {
+        stage('Docker Deploy') {
             steps {
                 bat 'docker stop hospital-container || exit 0'
                 bat 'docker rm hospital-container || exit 0'
-                bat 'docker run -d -p 9090:8080 --name hospital-container hospital-app'
+                bat 'docker run -d -p 9090:8085 --name hospital-container hospital-app'
             }
         }
     }
