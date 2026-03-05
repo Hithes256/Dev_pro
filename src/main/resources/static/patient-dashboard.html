@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Patient Dashboard</h2>
+
+    <h3>Welcome, <span id="patientName"></span></h3>
+
+    <h3>Available Doctors</h3>
+    <select id="doctorSelect">
+        <option value="">Loading doctors...</option>
+    </select>
+
+    <input type="date" id="appointmentDate">
+    <button id="bookBtn">Book Appointment</button>
+
+    <h3>Your Appointments</h3>
+    <ul id="patientAppointments"></ul>
+
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

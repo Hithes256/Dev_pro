@@ -2,24 +2,23 @@ package com.hospital.model;
 
 public class Patient {
 
-    private Long id;
+    private int id;
     private String name;
-    private String disease;
+    private String email;
 
     public Patient() {}
 
-    public Patient(Long id, String name, String disease) {
+    public Patient(int id, String name, String email) {
         this.id = id;
         this.name = name;
-        this.disease = disease;
+        this.email = email;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
+    public int getId() { return id; }
     public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getEmail() { return email; }
 
-    public String getDisease() { return disease; }
-    public void setDisease(String disease) { this.disease = disease; }
+    public void setId(int id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+    public void setEmail(String email) { this.email = email; }
 }
