@@ -2,34 +2,39 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven3'
+        maven 'Maven-3'
     }
 
     stages {
 
-        stage('Checkout') {
+        stage('Clone Repository') {
             steps {
-                git 'https://github.com/Hithes256/Dev_pro.git'
+                git 'https://github.com/YOUR_USERNAME/hospital-management-system.git'
             }
         }
 
-        stage('Build') {
+        stage('Build with Maven') {
             steps {
                 bat 'mvn clean package'
             }
         }
 
-        stage('Docker Build') {
+        stage('Build Docker Image') {
             steps {
                 bat 'docker build -t hospital-app .'
             }
         }
 
-        stage('Docker Deploy') {
+        stage('Stop Old Container') {
             steps {
                 bat 'docker stop hospital-container || exit 0'
                 bat 'docker rm hospital-container || exit 0'
-                bat 'docker run -d -p 9090:8085 --name hospital-container hospital-app'
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                bat 'docker run -d -p 8085:8085 --name hospital-container hospital-app'
             }
         }
     }
