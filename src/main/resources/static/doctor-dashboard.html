@@ -1,22 +1,386 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Doctor Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediCore — Doctor Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0a1628; --navy-mid: #112240;
+      --teal: #00c9b1; --teal-glow: rgba(0,201,177,0.15);
+      --gold: #f0c040; --gold-glow: rgba(240,192,64,0.15);
+      --red: #ff6b6b; --green: #56d9a0;
+      --white: #f8fafc; --muted: #8892a4; --muted2: #3d4f6b;
+      --border: rgba(255,255,255,0.07); --sidebar-w: 240px;
+    }
+    html, body { height: 100%; background: var(--navy); color: var(--white); font-family: 'DM Sans', sans-serif; }
+
+    .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--navy-mid); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 100; padding: 28px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; padding: 0 24px 28px; border-bottom: 1px solid var(--border); }
+    .brand-icon { width: 36px; height: 36px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 16px rgba(240,192,64,0.4); }
+    .brand-icon svg { width: 18px; height: 18px; fill: var(--navy); }
+    .brand-name { font-family: 'DM Serif Display', serif; font-size: 18px; }
+    .brand-name span { color: var(--gold); }
+    .nav-label { padding: 22px 24px 8px; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted2); }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 24px; margin: 2px 12px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--white); }
+    .nav-item.active { background: var(--gold-glow); color: var(--gold); }
+    .nav-icon { font-size: 15px; width: 20px; text-align: center; }
+    .sidebar-footer { margin-top: auto; padding: 20px 24px; border-top: 1px solid var(--border); }
+    .user-chip { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 1px solid var(--border); }
+    .user-av { width: 32px; height: 32px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+    .user-info { flex: 1; min-width: 0; }
+    .user-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user-role { font-size: 11px; color: var(--gold); }
+    .logout-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; transition: color 0.2s; }
+    .logout-btn:hover { color: var(--red); }
+
+    .main { margin-left: var(--sidebar-w); min-height: 100vh; padding: 36px 40px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .page-header { margin-bottom: 32px; animation: fadeUp 0.5s 0.05s both; }
+    .page-greeting { font-size: 13px; color: var(--gold); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+    .page-title { font-family: 'DM Serif Display', serif; font-size: 30px; }
+    .page-sub { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 28px; animation: fadeUp 0.5s 0.1s both; }
+    .stat-card { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+    .stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg,var(--gold),transparent); }
+    .sc-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 8px; }
+    .sc-val { font-family: 'DM Serif Display', serif; font-size: 34px; color: var(--gold); }
+    .sc-val.teal { color: var(--teal); }
+    .sc-icon { position: absolute; right: 16px; top: 16px; font-size: 22px; opacity: 0.3; }
+
+    .card { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 18px; padding: 26px; animation: fadeUp 0.5s 0.15s both; }
+    .card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+    .card-title { font-family: 'DM Serif Display', serif; font-size: 18px; }
+    .badge { font-size: 11px; font-weight: 600; letter-spacing: 1px; padding: 4px 10px; border-radius: 100px; }
+    .badge-gold { background: var(--gold-glow); color: var(--gold); border: 1px solid rgba(240,192,64,0.3); }
+    .badge-teal { background: var(--teal-glow); color: var(--teal); border: 1px solid rgba(0,201,177,0.3); }
+
+    /* Filter tabs */
+    .filter-row { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+    .filter-btn { padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+    .filter-btn.active { background: var(--gold-glow); border-color: var(--gold); color: var(--gold); }
+    .filter-btn:hover:not(.active) { background: rgba(255,255,255,0.04); color: var(--white); }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; }
+    thead th { text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); padding: 0 0 12px; border-bottom: 1px solid var(--border); }
+    thead th:last-child { text-align: right; }
+    tbody td { padding: 14px 0; border-top: 1px solid rgba(255,255,255,0.04); font-size: 14px; vertical-align: middle; }
+    tbody tr:first-child td { border-top: none; }
+    tbody tr:hover td { background: rgba(255,255,255,0.015); }
+
+    .pt-cell { display: flex; align-items: center; gap: 11px; }
+    .pt-av { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg,#1a3a5c,#2a5580); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+    .pt-name { font-weight: 600; }
+    .date-txt { font-size: 13px; color: var(--muted); }
+    .status-pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 100px; }
+    .s-upcoming { background: rgba(0,201,177,0.12); color: var(--teal); border: 1px solid rgba(0,201,177,0.25); }
+    .s-today    { background: var(--gold-glow); color: var(--gold); border: 1px solid rgba(240,192,64,0.3); }
+    .s-completed{ background: rgba(86,217,160,0.1); color: var(--green); border: 1px solid rgba(86,217,160,0.2); }
+    .s-done     { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+    .s-prescribed { background: rgba(0,201,177,0.1); color: var(--teal); border: 1px solid rgba(0,201,177,0.3); }
+    td:last-child { text-align: right; }
+
+    .two-col { display: grid; grid-template-columns: 3fr 2fr; gap: 22px; margin-top: 22px; }
+
+    /* Patients list */
+    .pt-item { display: flex; align-items: center; gap: 11px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .pt-item:last-child { border-bottom: none; }
+    .pt-meta { flex: 1; min-width: 0; }
+    .pt-pname { font-size: 14px; font-weight: 600; }
+    .pt-email { font-size: 12px; color: var(--muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* Doctors list */
+    .doc-item { display: flex; align-items: center; gap: 11px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .doc-item:last-child { border-bottom: none; }
+    .doc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .doc-dname { flex: 1; font-size: 13px; font-weight: 500; }
+    .doc-spec-tag { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 100px; background: rgba(255,255,255,0.06); color: var(--muted); }
+
+    .empty-state { text-align: center; padding: 36px 16px; color: var(--muted2); }
+    .empty-icon { font-size: 32px; margin-bottom: 8px; opacity: 0.5; }
+    .empty-state p { font-size: 13px; }
+
+    /* Rx quick action */
+    .btn-rx { padding: 7px 13px; background: none; border: 1px solid rgba(0,201,177,0.3); color: var(--teal); font-size: 12px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+    .btn-rx:hover { background: var(--teal-glow); }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Doctor Dashboard</h2>
-
-    <h3>Welcome, Dr. <span id="doctorName"></span></h3>
-
-    <h3>Your Appointments</h3>
-    <ul id="doctorAppointments"></ul>
-
-    <button onclick="logout()">Logout</button>
+<div class="sidebar">
+  <div class="brand">
+    <div class="brand-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14h-2v-4H6v-2h4V7h2v4h4v2h-4v4z"/></svg></div>
+    <div class="brand-name">Medi<span>Core</span></div>
+  </div>
+  <div class="nav-label">Navigation</div>
+  <a class="nav-item active" href="#"><span class="nav-icon">🏥</span>Dashboard</a>
+  <a class="nav-item" href="patients.html"><span class="nav-icon">👥</span>Patients</a>
+  <a class="nav-item" href="prescriptions.html"><span class="nav-icon">💊</span>Prescriptions</a>
+  <div class="sidebar-footer">
+    <div class="user-chip">
+      <div class="user-av" id="sidebarAv">D</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebarName">Doctor</div>
+        <div class="user-role">Physician</div>
+      </div>
+      <button class="logout-btn" onclick="logout()" title="Logout">⏻</button>
+    </div>
+  </div>
 </div>
 
-<script src="js/script.js"></script>
+<div class="main">
+
+  <div class="page-header">
+    <div class="page-greeting">Doctor Portal</div>
+    <h1 class="page-title">Good day, Dr. <span id="doctorName">—</span></h1>
+    <p class="page-sub" id="todayLabel">—</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="sc-label">Pending Appointments</div>
+      <div class="sc-val" id="statMyAppts">0</div>
+      <div class="sc-icon">📅</div>
+    </div>
+    <div class="stat-card">
+      <div class="sc-label">Today's Visits</div>
+      <div class="sc-val teal" id="statToday">0</div>
+      <div class="sc-icon">📋</div>
+    </div>
+    <div class="stat-card">
+      <div class="sc-label">Active Patients</div>
+      <div class="sc-val" id="statPatients">0</div>
+      <div class="sc-icon">👥</div>
+    </div>
+    <div class="stat-card">
+      <div class="sc-label">Prescriptions Issued</div>
+      <div class="sc-val teal" id="statRx">0</div>
+      <div class="sc-icon">💊</div>
+    </div>
+  </div>
+
+  <!-- Appointments table -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">My Schedule</div>
+      <span class="badge badge-gold" id="apptBadge">0 appointments</span>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" data-f="all" onclick="filterTable(this)">All</button>
+      <button class="filter-btn" data-f="today" onclick="filterTable(this)">Today</button>
+      <button class="filter-btn" data-f="upcoming" onclick="filterTable(this)">Upcoming</button>
+      <button class="filter-btn" data-f="completed" onclick="filterTable(this)">Completed</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead><tr><th>Patient</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="apptTbody">
+          <tr><td colspan="4"><div class="empty-state"><div class="empty-icon">⏳</div><p>Loading…</p></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <!-- All patients -->
+    <div class="card" style="animation-delay:0.2s">
+      <div class="card-head">
+        <div class="card-title">Registered Patients</div>
+        <span class="badge badge-gold" id="patientBadge">0 patients</span>
+      </div>
+      <div id="patientList"><div class="empty-state"><div class="empty-icon">⏳</div><p>Loading…</p></div></div>
+    </div>
+
+    <!-- Specialist directory -->
+    <div class="card" style="animation-delay:0.25s">
+      <div class="card-head">
+        <div class="card-title">Medical Team</div>
+        <span class="badge badge-teal" id="docTeamBadge">—</span>
+      </div>
+      <div id="docTeamList"><div class="empty-state"><div class="empty-icon">⏳</div></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const API = 'http://localhost:8089/api';
+  const doctorName = localStorage.getItem('userName') || 'Doctor';
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  document.getElementById('doctorName').textContent = doctorName;
+  document.getElementById('sidebarName').textContent = 'Dr. ' + doctorName;
+  document.getElementById('sidebarAv').textContent = doctorName.charAt(0).toUpperCase();
+  document.getElementById('todayLabel').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+  function logout() { localStorage.clear(); window.location.href = 'login.html'; }
+
+  let allMyAppts = [];
+  let currentFilter = 'all';
+
+  function getStatus(appt) {
+    if (appt.status === 'done') return 'done';
+    if (appt.date === todayStr) return 'today';
+    if (appt.date > todayStr) return 'upcoming';
+    return 'completed';
+  }
+
+  function renderTable(appts) {
+    const tbody = document.getElementById('apptTbody');
+    if (!appts.length) {
+      tbody.innerHTML = `<tr><td colspan="4"><div class="empty-state"><div class="empty-icon">📋</div><p>No appointments yet.<br/>Patients will appear here once they book.</p></div></td></tr>`;
+      return;
+    }
+    tbody.innerHTML = '';
+    [...appts].sort((a,b) => a.date > b.date ? 1 : -1).forEach(a => {
+      const s = getStatus(a);
+      const d = new Date(a.date + 'T00:00:00');
+      const fmt = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+      const init = (a.patientName||'?').charAt(0).toUpperCase();
+      const pillMap  = { upcoming:'s-upcoming', today:'s-today', completed:'s-completed', done:'s-prescribed' };
+      const labelMap = { upcoming:'Upcoming',   today:'Today',   completed:'Visited',     done:'Prescribed ✓' };
+      // Only show Prescribe button for non-done appointments
+      const actionCell = s === 'done'
+        ? `<span style="font-size:12px;color:var(--teal);">✓ Done</span>`
+        : `<button class="btn-rx" onclick="goToPrescribe('${encodeURIComponent(a.patientName)}')">Prescribe</button>`;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><div class="pt-cell"><div class="pt-av">${init}</div><div class="pt-name">${a.patientName}</div></div></td>
+        <td><span class="date-txt">📅 ${fmt}</span></td>
+        <td><span class="status-pill ${pillMap[s]}">${labelMap[s]}</span></td>
+        <td>${actionCell}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Navigate to prescriptions page with patient pre-selected
+  function goToPrescribe(encodedPatient) {
+    window.location.href = `prescriptions.html?patient=${encodedPatient}`;
+  }
+
+  function filterTable(btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.f;
+    applyFilter();
+  }
+
+  function applyFilter() {
+    renderTable(currentFilter === 'all' ? allMyAppts : allMyAppts.filter(a => getStatus(a) === currentFilter));
+  }
+
+  // ── Fetch only appointments (called on every refresh tick) ──
+  async function refreshAppointments() {
+    try {
+      let appts = [];
+      // Always fetch ALL and filter client-side — most reliable regardless of backend status filter
+      const r = await fetch(`${API}/appointments`);
+      if (r.ok) {
+        const all = await r.json();
+        appts = all.filter(a => a.doctorName && a.doctorName.toLowerCase() === doctorName.toLowerCase());
+      }
+
+      // Update only if data changed (avoid unnecessary DOM thrash)
+      const newJson = JSON.stringify(appts);
+      const oldJson = JSON.stringify(allMyAppts);
+      if (newJson !== oldJson) {
+        allMyAppts = appts;
+        document.getElementById('statMyAppts').textContent = allMyAppts.filter(a => a.status !== 'done').length;
+        document.getElementById('statToday').textContent   = allMyAppts.filter(a => a.date === todayStr).length;
+        const uniquePatients = new Set(allMyAppts.map(a => a.patientName.toLowerCase()));
+        document.getElementById('statPatients').textContent = uniquePatients.size;
+        document.getElementById('apptBadge').textContent   = `${allMyAppts.length} appointment${allMyAppts.length !== 1 ? 's' : ''}`;
+        applyFilter();
+      }
+    } catch(e) {}
+  }
+
+  async function loadAll() {
+    // ── Appointments (first load shows loading state) ──
+    try {
+      let appts = [];
+      const r = await fetch(`${API}/appointments`);
+      if (r.ok) {
+        const all = await r.json();
+        appts = all.filter(a => a.doctorName && a.doctorName.toLowerCase() === doctorName.toLowerCase());
+      }
+      allMyAppts = appts;
+      // My Appointments = pending (not yet prescribed)
+      document.getElementById('statMyAppts').textContent = allMyAppts.filter(a => a.status !== 'done').length;
+      // Today's Visits = ALL appointments dated today (including already prescribed ones)
+      document.getElementById('statToday').textContent   = allMyAppts.filter(a => a.date === todayStr).length;
+      // Active Patients = unique patients who have appointments with this doctor
+      const uniquePatients = new Set(allMyAppts.map(a => a.patientName.toLowerCase()));
+      document.getElementById('statPatients').textContent = uniquePatients.size;
+      document.getElementById('apptBadge').textContent   = `${allMyAppts.length} appointment${allMyAppts.length !== 1 ? 's' : ''}`;
+      applyFilter();
+    } catch(e) {
+      document.getElementById('apptTbody').innerHTML = `<tr><td colspan="4"><div class="empty-state"><div class="empty-icon">⚠️</div><p>Server not reachable. Start Spring Boot on port 8080.</p></div></td></tr>`;
+    }
+
+    // My prescriptions count
+    try {
+      const res = await fetch(`${API}/doctorPrescriptions/${encodeURIComponent(doctorName)}`);
+      const rx = await res.json();
+      document.getElementById('statRx').textContent = rx.length;
+    } catch(e) {}
+
+    // All patients (for the Registered Patients list panel only)
+    try {
+      const res = await fetch(`${API}/patients`);
+      const patients = await res.json();
+      document.getElementById('patientBadge').textContent = `${patients.length} patient${patients.length!==1?'s':''}`;
+      const list = document.getElementById('patientList');
+      if (!patients.length) {
+        list.innerHTML = `<div class="empty-state"><div class="empty-icon">👤</div><p>No patients registered yet</p></div>`;
+      } else {
+        list.innerHTML = '';
+        patients.forEach(p => {
+          const init = (p.name||'?').charAt(0).toUpperCase();
+          const div = document.createElement('div');
+          div.className = 'pt-item';
+          div.innerHTML = `
+            <div class="pt-av" style="background:linear-gradient(135deg,#1a3a5c,#2a5580)">${init}</div>
+            <div class="pt-meta">
+              <div class="pt-pname">${p.name}</div>
+              <div class="pt-email">${p.email || '—'}</div>
+            </div>
+          `;
+          list.appendChild(div);
+        });
+      }
+    } catch(e) {}
+
+    // Doctors / team
+    try {
+      const res = await fetch(`${API}/doctors`);
+      const doctors = await res.json();
+      document.getElementById('docTeamBadge').textContent = `${doctors.length} members`;
+      const colors = ['#00c9b1','#f0c040','#ff6b6b','#56d9a0','#8b5cf6'];
+      const list = document.getElementById('docTeamList');
+      list.innerHTML = '';
+      doctors.forEach((d, i) => {
+        const div = document.createElement('div');
+        div.className = 'doc-item';
+        div.innerHTML = `
+          <div class="doc-dot" style="background:${colors[i%colors.length]}"></div>
+          <div class="doc-dname">Dr. ${d.name}${d.name === doctorName ? ' <span style="color:var(--gold);font-size:11px;">(you)</span>' : ''}</div>
+          <span class="doc-spec-tag">${d.specialization}</span>
+        `;
+        list.appendChild(div);
+      });
+    } catch(e) {}
+  }
+
+  // Initial load + auto-refresh appointments every 5 seconds
+  loadAll();
+  setInterval(refreshAppointments, 5000);
+</script>
 </body>
 </html>

@@ -9,7 +9,7 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/hospital-management-system.git'
+                git 'https://github.com/Hithes256/Dev_pro.git'
             }
         }
 
@@ -34,7 +34,7 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                bat 'docker run -d -p 8085:8085 --name hospital-container hospital-app'
+                bat 'docker run -d -p 8089:8089 --name hospital-container hospital-app'
             }
         }
     }

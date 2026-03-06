@@ -1,48 +1,258 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Patients</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediCore — Patients</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0a1628; --navy-mid: #112240;
+      --teal: #00c9b1; --teal-dark: #00a896; --teal-glow: rgba(0,201,177,0.15);
+      --gold: #f0c040; --gold-glow: rgba(240,192,64,0.15);
+      --red: #ff6b6b; --white: #f8fafc; --muted: #8892a4; --muted2: #3d4f6b;
+      --border: rgba(255,255,255,0.07); --sidebar-w: 240px;
+    }
+    html, body { height: 100%; background: var(--navy); color: var(--white); font-family: 'DM Sans', sans-serif; }
+
+    .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--navy-mid); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 100; padding: 28px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; padding: 0 24px 28px; border-bottom: 1px solid var(--border); }
+    .brand-icon { width: 36px; height: 36px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 16px rgba(240,192,64,0.4); }
+    .brand-icon svg { width: 18px; height: 18px; fill: var(--navy); }
+    .brand-name { font-family: 'DM Serif Display', serif; font-size: 18px; }
+    .brand-name span { color: var(--gold); }
+    .nav-label { padding: 22px 24px 8px; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted2); }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 24px; margin: 2px 12px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--white); }
+    .nav-item.active { background: var(--gold-glow); color: var(--gold); }
+    .nav-icon { font-size: 15px; width: 20px; text-align: center; }
+    .sidebar-footer { margin-top: auto; padding: 20px 24px; border-top: 1px solid var(--border); }
+    .user-chip { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 1px solid var(--border); }
+    .user-av { width: 32px; height: 32px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+    .user-info { flex: 1; min-width: 0; }
+    .user-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user-role { font-size: 11px; color: var(--gold); }
+    .logout-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; transition: color 0.2s; }
+    .logout-btn:hover { color: var(--red); }
+
+    .main { margin-left: var(--sidebar-w); min-height: 100vh; padding: 36px 40px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .page-header { margin-bottom: 28px; animation: fadeUp 0.5s 0.05s both; }
+    .page-greeting { font-size: 13px; color: var(--gold); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+    .page-title { font-family: 'DM Serif Display', serif; font-size: 30px; }
+
+    .toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 22px; flex-wrap: wrap; animation: fadeUp 0.5s 0.1s both; }
+    .search-wrap { position: relative; flex: 1; min-width: 220px; }
+    .search-wrap input { width: 100%; padding: 12px 16px 12px 42px; background: var(--navy-mid); border: 1px solid var(--border); border-radius: 11px; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; transition: all 0.2s; }
+    .search-wrap input:focus { border-color: var(--teal); background: rgba(0,201,177,0.04); box-shadow: 0 0 0 3px rgba(0,201,177,0.1); }
+    .search-wrap input::placeholder { color: var(--muted2); }
+    .search-icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); font-size: 15px; pointer-events: none; }
+    .btn-add { display: flex; align-items: center; gap: 7px; padding: 12px 20px; border: none; border-radius: 11px; background: linear-gradient(135deg, var(--teal), var(--teal-dark)); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(0,201,177,0.3); white-space: nowrap; }
+    .btn-add:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,201,177,0.4); }
+
+    .card { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; animation: fadeUp 0.5s 0.15s both; }
+    .card-header { padding: 20px 26px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .card-title { font-family: 'DM Serif Display', serif; font-size: 18px; }
+    .badge { background: var(--gold-glow); color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: 1px; padding: 4px 10px; border-radius: 100px; border: 1px solid rgba(240,192,64,0.3); }
+
+    table { width: 100%; border-collapse: collapse; }
+    thead th { padding: 0 26px; height: 42px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); background: rgba(255,255,255,0.02); }
+    tbody td { padding: 14px 26px; border-top: 1px solid rgba(255,255,255,0.04); font-size: 14px; vertical-align: middle; }
+    tbody tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .pt-cell { display: flex; align-items: center; gap: 11px; }
+    .pt-av { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg,#1a3a5c,#2a5580); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .pt-name { font-weight: 600; }
+    .pt-id { font-size: 11px; color: var(--muted); margin-top: 1px; }
+    .email-cell { color: var(--muted); font-size: 13px; }
+    .action-btn { padding: 7px 13px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .action-btn:hover { background: var(--teal-glow); border-color: var(--teal); color: var(--teal); }
+
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--muted2); }
+    .empty-icon { font-size: 36px; margin-bottom: 10px; opacity: 0.5; }
+    .empty-state p { font-size: 13px; }
+
+    /* Modal */
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); z-index: 500; display: none; align-items: center; justify-content: center; }
+    .overlay.open { display: flex; }
+    .modal { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 20px; padding: 36px; width: 100%; max-width: 400px; box-shadow: 0 32px 80px rgba(0,0,0,0.5); animation: mIn 0.3s cubic-bezier(.22,1,.36,1); }
+    @keyframes mIn { from { opacity:0; transform: scale(0.94) translateY(20px); } to { opacity:1; transform: none; } }
+    .modal-title { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 24px; }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .field input { width: 100%; padding: 12px 15px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; transition: all 0.2s; }
+    .field input:focus { border-color: var(--teal); background: rgba(0,201,177,0.04); box-shadow: 0 0 0 3px rgba(0,201,177,0.1); }
+    .field input::placeholder { color: var(--muted2); }
+    .field input.error { border-color: var(--red) !important; }
+    .modal-btns { display: flex; gap: 10px; margin-top: 22px; }
+    .btn-cancel { flex: 1; padding: 13px; border: 1px solid var(--border); border-radius: 10px; background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .btn-cancel:hover { background: rgba(255,255,255,0.04); color: var(--white); }
+    .btn-save { flex: 2; padding: 13px; border: none; border-radius: 10px; background: linear-gradient(135deg, var(--teal), var(--teal-dark)); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(0,201,177,0.3); transition: all 0.2s; }
+    .btn-save:hover { box-shadow: 0 8px 24px rgba(0,201,177,0.4); }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 28px; right: 28px; background: var(--navy-mid); border: 1px solid var(--teal); color: var(--white); padding: 14px 20px; border-radius: 12px; font-size: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 10px; transform: translateY(24px); opacity: 0; transition: all 0.35s cubic-bezier(.22,1,.36,1); z-index: 999; }
+    .toast.show { transform: none; opacity: 1; }
+    .toast.err { border-color: var(--red); }
+  </style>
 </head>
 <body>
 
-<div class="header">
-    <div>Hospital Management</div>
-    <div>Doctor | Logout</div>
+<div class="sidebar">
+  <div class="brand">
+    <div class="brand-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14h-2v-4H6v-2h4V7h2v4h4v2h-4v4z"/></svg></div>
+    <div class="brand-name">Medi<span>Core</span></div>
+  </div>
+  <div class="nav-label">Navigation</div>
+  <a class="nav-item" href="doctor-dashboard.html"><span class="nav-icon">🏥</span>Dashboard</a>
+  <a class="nav-item active" href="#"><span class="nav-icon">👥</span>Patients</a>
+  <a class="nav-item" href="prescriptions.html"><span class="nav-icon">💊</span>Prescriptions</a>
+  <div class="sidebar-footer">
+    <div class="user-chip">
+      <div class="user-av" id="sidebarAv">D</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebarName">Doctor</div>
+        <div class="user-role">Physician</div>
+      </div>
+      <button class="logout-btn" onclick="logout()">⏻</button>
+    </div>
+  </div>
 </div>
 
-<div class="container">
-
-    <div class="sidebar">
-        <a href="doctor-dashboard.html">Dashboard</a>
-        <a href="#">Patients</a>
-        <a href="prescriptions.html">Prescriptions</a>
+<div class="main">
+  <div class="page-header">
+    <div class="page-greeting">Patient Registry</div>
+    <h1 class="page-title">All Patients</h1>
+  </div>
+  <div class="toolbar">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search by name or email…" oninput="filterPatients()"/>
     </div>
-
-    <div class="content">
-
-        <input type="text" placeholder="Search Patient">
-        <button class="btn">Add Patient</button>
-
-        <br><br>
-
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td>01</td>
-                <td>John</td>
-                <td>34</td>
-                <td><button class="btn">View</button></td>
-            </tr>
-        </table>
-
+    <button class="btn-add" onclick="openModal()">+ Add Patient</button>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Patient Directory</div>
+      <div class="badge" id="patientBadge">0 patients</div>
     </div>
+    <table>
+      <thead><tr><th>Patient</th><th>Email</th><th>Action</th></tr></thead>
+      <tbody id="patientTable">
+        <tr><td colspan="3"><div class="empty-state"><div class="empty-icon">⏳</div><p>Loading patients…</p></div></td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
+<!-- Add Patient Modal -->
+<div class="overlay" id="addModal">
+  <div class="modal">
+    <div class="modal-title">Add New Patient</div>
+    <div class="field"><label>Full Name</label><input type="text" id="newName" placeholder="Patient's full name"/></div>
+    <div class="field"><label>Email Address</label><input type="email" id="newEmail" placeholder="patient@email.com"/></div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="addPatient()">Add Patient →</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span id="toastIcon">✅</span>&nbsp;<span id="toastMsg">Done</span></div>
+
+<script>
+  const API = 'http://localhost:8089/api';
+  const name = localStorage.getItem('userName') || 'Doctor';
+  document.getElementById('sidebarName').textContent = 'Dr. ' + name;
+  document.getElementById('sidebarAv').textContent = name.charAt(0).toUpperCase();
+
+  function logout() { localStorage.clear(); window.location.href = 'login.html'; }
+
+  function showToast(msg, isErr = false) {
+    document.getElementById('toastIcon').textContent = isErr ? '❌' : '✅';
+    document.getElementById('toastMsg').textContent = msg;
+    const t = document.getElementById('toast');
+    t.classList.toggle('err', isErr);
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  let allPatients = [];
+
+  async function loadPatients() {
+    try {
+      const res = await fetch(`${API}/patients`);
+      if (!res.ok) throw new Error();
+      allPatients = await res.json();
+      renderPatients(allPatients);
+    } catch(e) {
+      document.getElementById('patientTable').innerHTML = `<tr><td colspan="3"><div class="empty-state"><div class="empty-icon">⚠️</div><p>Server not reachable.<br/>Ensure Spring Boot is running on localhost:8080</p></div></td></tr>`;
+    }
+  }
+
+  function renderPatients(list) {
+    document.getElementById('patientBadge').textContent = `${list.length} patient${list.length!==1?'s':''}`;
+    const tbody = document.getElementById('patientTable');
+    if (!list.length) {
+      tbody.innerHTML = `<tr><td colspan="3"><div class="empty-state"><div class="empty-icon">👤</div><p>No patients registered yet.<br/>Click "+ Add Patient" to get started.</p></div></td></tr>`;
+      return;
+    }
+    tbody.innerHTML = '';
+    list.forEach((p, i) => {
+      const init = (p.name||'?').charAt(0).toUpperCase();
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>
+          <div class="pt-cell">
+            <div class="pt-av">${init}</div>
+            <div>
+              <div class="pt-name">${p.name}</div>
+              <div class="pt-id">ID #${String(p.id||i+1).padStart(4,'0')}</div>
+            </div>
+          </div>
+        </td>
+        <td class="email-cell">${p.email||'—'}</td>
+        <td><button class="action-btn">View</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function filterPatients() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    renderPatients(q ? allPatients.filter(p => (p.name||'').toLowerCase().includes(q) || (p.email||'').toLowerCase().includes(q)) : allPatients);
+  }
+
+  function openModal() { document.getElementById('addModal').classList.add('open'); document.getElementById('newName').focus(); }
+  function closeModal() {
+    document.getElementById('addModal').classList.remove('open');
+    document.getElementById('newName').value = '';
+    document.getElementById('newEmail').value = '';
+    document.getElementById('newName').classList.remove('error');
+  }
+
+  async function addPatient() {
+    const pName = document.getElementById('newName').value.trim();
+    const pEmail = document.getElementById('newEmail').value.trim();
+    if (!pName) { document.getElementById('newName').classList.add('error'); return; }
+    try {
+      const res = await fetch(`${API}/patients`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: pName, email: pEmail })
+      });
+      closeModal();
+      await loadPatients();
+      showToast(`Patient "${pName}" added successfully!`);
+    } catch(e) {
+      showToast('Could not add patient. Server may be offline.', true);
+    }
+  }
+
+  document.getElementById('addModal').addEventListener('click', e => { if (e.target === document.getElementById('addModal')) closeModal(); });
+  document.getElementById('newName').addEventListener('input', function() { this.classList.remove('error'); });
+
+  loadPatients();
+</script>
 </body>
 </html>

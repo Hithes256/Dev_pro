@@ -1,30 +1,505 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Patient Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediCore — Patient Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0a1628; --navy-mid: #112240;
+      --teal: #00c9b1; --teal-dark: #00a896; --teal-glow: rgba(0,201,177,0.15);
+      --gold: #f0c040; --red: #ff6b6b; --green: #56d9a0;
+      --white: #f8fafc; --muted: #8892a4; --muted2: #3d4f6b;
+      --border: rgba(255,255,255,0.07); --sidebar-w: 240px;
+    }
+    html, body { height: 100%; background: var(--navy); color: var(--white); font-family: 'DM Sans', sans-serif; }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--navy-mid); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 100; padding: 28px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; padding: 0 24px 28px; border-bottom: 1px solid var(--border); }
+    .brand-icon { width: 36px; height: 36px; background: var(--teal); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 16px rgba(0,201,177,0.4); }
+    .brand-icon svg { width: 18px; height: 18px; fill: var(--navy); }
+    .brand-name { font-family: 'DM Serif Display', serif; font-size: 18px; }
+    .brand-name span { color: var(--teal); }
+    .nav-label { padding: 22px 24px 8px; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted2); }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 24px; margin: 2px 12px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--white); }
+    .nav-item.active { background: var(--teal-glow); color: var(--teal); }
+    .nav-icon { font-size: 15px; width: 20px; text-align: center; }
+    .sidebar-footer { margin-top: auto; padding: 20px 24px; border-top: 1px solid var(--border); }
+    .user-chip { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 1px solid var(--border); }
+    .user-av { width: 32px; height: 32px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+    .user-info { flex: 1; min-width: 0; }
+    .user-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user-role { font-size: 11px; color: var(--teal); }
+    .logout-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; transition: color 0.2s; }
+    .logout-btn:hover { color: var(--red); }
+
+    /* ── MAIN ── */
+    .main { margin-left: var(--sidebar-w); min-height: 100vh; padding: 36px 40px; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .anim { animation: fadeUp 0.5s both; }
+
+    .page-header { margin-bottom: 32px; animation: fadeUp 0.5s 0.05s both; }
+    .page-greeting { font-size: 13px; color: var(--teal); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+    .page-title { font-family: 'DM Serif Display', serif; font-size: 30px; }
+    .page-sub { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 28px; animation: fadeUp 0.5s 0.1s both; }
+    .stat-card { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+    .stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg,var(--teal),transparent); }
+    .sc-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 8px; }
+    .sc-val { font-family: 'DM Serif Display', serif; font-size: 34px; color: var(--teal); }
+    .sc-icon { position: absolute; right: 18px; top: 18px; font-size: 22px; opacity: 0.3; }
+
+    /* Grid */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+
+    /* Card */
+    .card { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 18px; padding: 26px; animation: fadeUp 0.5s 0.15s both; }
+    .card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+    .card-title { font-family: 'DM Serif Display', serif; font-size: 18px; }
+    .badge { background: var(--teal-glow); color: var(--teal); font-size: 11px; font-weight: 600; letter-spacing: 1px; padding: 4px 10px; border-radius: 100px; border: 1px solid rgba(0,201,177,0.3); }
+
+    /* Doctor cards */
+    .doctor-grid { display: flex; flex-direction: column; gap: 10px; }
+    .doctor-card { display: flex; align-items: center; gap: 13px; padding: 13px 15px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+    .doctor-card:hover { background: rgba(0,201,177,0.06); border-color: rgba(0,201,177,0.3); }
+    .doctor-card.selected { background: var(--teal-glow); border-color: var(--teal); }
+    .doc-av { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .doc-info { flex: 1; }
+    .doc-name { font-size: 14px; font-weight: 600; }
+    .doc-spec { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .doc-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; transition: all 0.2s; flex-shrink: 0; }
+    .doctor-card.selected .doc-check { background: var(--teal); border-color: var(--teal); color: var(--navy); font-weight: 700; }
+
+    /* Error state */
+    .api-error { text-align: center; padding: 30px 16px; }
+    .api-error .err-icon { font-size: 32px; margin-bottom: 10px; }
+    .api-error p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .api-error strong { color: #ff6b6b; }
+
+    /* Book form */
+    .book-form { display: flex; flex-direction: column; gap: 14px; }
+    .field label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .field input { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; transition: all 0.2s; }
+    .field input:focus { border-color: var(--teal); background: rgba(0,201,177,0.04); box-shadow: 0 0 0 3px rgba(0,201,177,0.1); }
+    input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6) brightness(1.5); cursor: pointer; }
+
+    .selected-doc-display { padding: 12px 16px; border-radius: 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); font-size: 14px; color: var(--muted); min-height: 45px; display: flex; align-items: center; transition: all 0.2s; }
+    .selected-doc-display.has-doctor { background: var(--teal-glow); border-color: rgba(0,201,177,0.4); color: var(--teal); font-weight: 600; }
+
+    .btn-book { width: 100%; padding: 14px; border: none; border-radius: 11px; background: linear-gradient(135deg, var(--teal), var(--teal-dark)); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 6px 20px rgba(0,201,177,0.3); }
+    .btn-book:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,201,177,0.4); }
+    .btn-book:active { transform: none; }
+    .btn-book:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* Appointments list */
+    .appt-list { display: flex; flex-direction: column; gap: 10px; max-height: 420px; overflow-y: auto; }
+    .appt-list::-webkit-scrollbar { width: 4px; }
+    .appt-list::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 4px; }
+    .appt-item { display: flex; align-items: center; gap: 13px; padding: 14px 15px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
+    .appt-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); flex-shrink: 0; box-shadow: 0 0 8px rgba(0,201,177,0.6); }
+    .appt-info { flex: 1; }
+    .appt-doctor { font-size: 14px; font-weight: 600; }
+    .appt-date { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .appt-status { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 100px; }
+    .appt-status.upcoming { background: rgba(0,201,177,0.12); color: var(--teal); border: 1px solid rgba(0,201,177,0.25); }
+    .appt-status.today { background: rgba(240,192,64,0.12); color: var(--gold); border: 1px solid rgba(240,192,64,0.3); }
+    .appt-status.completed { background: rgba(86,217,160,0.1); color: var(--green); border: 1px solid rgba(86,217,160,0.2); }
+
+    .empty-state { text-align: center; padding: 40px 16px; color: var(--muted2); }
+    .empty-icon { font-size: 36px; margin-bottom: 10px; opacity: 0.5; }
+    .empty-state p { font-size: 13px; }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 28px; right: 28px; background: var(--navy-mid); border: 1px solid var(--teal); color: var(--white); padding: 14px 20px; border-radius: 12px; font-size: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 10px; transform: translateY(24px); opacity: 0; transition: all 0.35s cubic-bezier(.22,1,.36,1); z-index: 999; max-width: 340px; }
+    .toast.show { transform: none; opacity: 1; }
+    .toast.err { border-color: var(--red); }
+
+    /* Prescriptions */
+    .rx-section { margin-top: 22px; }
+    .rx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 16px; }
+    .rx-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; position: relative; overflow: hidden; transition: background 0.2s, border-color 0.2s; animation: fadeUp 0.4s both; }
+    .rx-card::before { content:''; position:absolute; top:0; left:0; bottom:0; width:3px; background: linear-gradient(180deg, var(--teal), #005f73); border-radius: 3px 0 0 3px; }
+    .rx-card:hover { background: rgba(0,201,177,0.05); border-color: rgba(0,201,177,0.2); }
+    .rx-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; gap: 10px; }
+    .rx-card-doctor { font-size: 13px; font-weight: 700; color: var(--white); }
+    .rx-card-date { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .rx-new-badge { font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 3px 9px; border-radius: 100px; background: rgba(0,201,177,0.15); color: var(--teal); border: 1px solid rgba(0,201,177,0.3); white-space: nowrap; flex-shrink: 0; }
+    .rx-diag { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--gold); margin-bottom: 10px; }
+    .rx-meds-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted2); margin-bottom: 5px; }
+    .rx-meds { font-size: 13px; color: var(--muted); line-height: 1.65; white-space: pre-wrap; }
+    .rx-notes { font-size: 12px; color: var(--muted2); font-style: italic; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Patient Dashboard</h2>
-
-    <h3>Welcome, <span id="patientName"></span></h3>
-
-    <h3>Available Doctors</h3>
-    <select id="doctorSelect">
-        <option value="">Loading doctors...</option>
-    </select>
-
-    <input type="date" id="appointmentDate">
-    <button id="bookBtn">Book Appointment</button>
-
-    <h3>Your Appointments</h3>
-    <ul id="patientAppointments"></ul>
-
-    <button onclick="logout()">Logout</button>
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="brand">
+    <div class="brand-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14h-2v-4H6v-2h4V7h2v4h4v2h-4v4z"/></svg></div>
+    <div class="brand-name">Medi<span>Core</span></div>
+  </div>
+  <div class="nav-label">Navigation</div>
+  <a class="nav-item active" href="#"><span class="nav-icon">🏠</span>Dashboard</a>
+  <a class="nav-item" href="#appt-section"><span class="nav-icon">📅</span>My Appointments</a>
+  <a class="nav-item" href="#book-section"><span class="nav-icon">➕</span>Book Appointment</a>
+  <a class="nav-item" href="#rx-section"><span class="nav-icon">💊</span>My Prescriptions</a>
+  <div class="sidebar-footer">
+    <div class="user-chip">
+      <div class="user-av" id="sidebarAv">P</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebarName">Patient</div>
+        <div class="user-role">Patient</div>
+      </div>
+      <button class="logout-btn" onclick="logout()" title="Logout">⏻</button>
+    </div>
+  </div>
 </div>
 
-<script src="js/script.js"></script>
+<!-- MAIN -->
+<div class="main">
+
+  <div class="page-header">
+    <div class="page-greeting">Patient Portal</div>
+    <h1 class="page-title">Welcome, <span id="patientName">—</span></h1>
+    <p class="page-sub">Book appointments and track your health visits</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="sc-label">My Appointments</div>
+      <div class="sc-val" id="statTotal">0</div>
+      <div class="sc-icon">📅</div>
+    </div>
+    <div class="stat-card">
+      <div class="sc-label">Upcoming</div>
+      <div class="sc-val" id="statUpcoming">0</div>
+      <div class="sc-icon">⏰</div>
+    </div>
+    <div class="stat-card">
+      <div class="sc-label">Doctors Available</div>
+      <div class="sc-val" id="statDoctors">—</div>
+      <div class="sc-icon">👨‍⚕️</div>
+    </div>
+    <div class="stat-card">
+      <div class="sc-label">Prescriptions</div>
+      <div class="sc-val" id="statRx">0</div>
+      <div class="sc-icon">💊</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <!-- LEFT COLUMN: Doctors + Book -->
+    <div style="display:flex;flex-direction:column;gap:22px;">
+
+      <!-- Doctors -->
+      <div class="card" id="book-section">
+        <div class="card-head">
+          <div class="card-title">Choose a Specialist</div>
+          <div class="badge" id="docBadge">Loading…</div>
+        </div>
+        <div class="doctor-grid" id="doctorGrid">
+          <div class="empty-state"><div class="empty-icon">⏳</div><p>Connecting to server…</p></div>
+        </div>
+      </div>
+
+      <!-- Book Appointment -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Book Appointment</div>
+        </div>
+        <div class="book-form">
+          <div class="field">
+            <label>Selected Doctor</label>
+            <div class="selected-doc-display" id="selDocDisplay">— tap a doctor above to select —</div>
+          </div>
+          <div class="field">
+            <label>Appointment Date</label>
+            <input type="date" id="apptDate"/>
+          </div>
+          <button class="btn-book" id="bookBtn">Confirm Appointment →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: My Appointments -->
+    <div class="card" id="appt-section" style="animation-delay:0.2s">
+      <div class="card-head">
+        <div class="card-title">My Appointments</div>
+        <div class="badge" id="apptBadge">0 total</div>
+      </div>
+      <div class="appt-list" id="apptList">
+        <div class="empty-state"><div class="empty-icon">📋</div><p>No appointments yet.<br/>Book your first one!</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRESCRIPTIONS SECTION -->
+  <div class="rx-section" id="rx-section">
+    <div class="card" style="animation-delay:0.3s">
+      <div class="card-head">
+        <div class="card-title">My Prescriptions</div>
+        <div class="badge" id="rxBadge">0 prescriptions</div>
+      </div>
+      <div id="rxGrid" class="rx-grid">
+        <div class="empty-state" style="grid-column:1/-1">
+          <div class="empty-icon">💊</div>
+          <p>No prescriptions yet.<br/>They will appear here once your doctor issues one.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <span id="toastIcon">✅</span>
+  <span id="toastMsg">Done</span>
+</div>
+
+<script>
+  const API = 'http://localhost:8089/api';
+  const patientName = localStorage.getItem('userName') || 'Patient';
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  // Seed UI names
+  document.getElementById('patientName').textContent = patientName;
+  document.getElementById('sidebarName').textContent = patientName;
+  document.getElementById('sidebarAv').textContent = patientName.charAt(0).toUpperCase();
+
+  // Set date min
+  document.getElementById('apptDate').min = todayStr;
+  document.getElementById('apptDate').value = todayStr;
+
+  function logout() { localStorage.clear(); window.location.href = 'login.html'; }
+
+  function showToast(msg, isErr = false) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastIcon').textContent = isErr ? '❌' : '✅';
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.toggle('err', isErr);
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  // ── LOAD DOCTORS ──
+  let selectedDoc = null;
+  const avatarColors = ['#0d9488','#0891b2','#7c3aed','#b45309','#be185d'];
+
+  async function loadDoctors() {
+    try {
+      const res = await fetch(`${API}/doctors`);
+      if (!res.ok) throw new Error('bad response');
+      const doctors = await res.json();
+      document.getElementById('statDoctors').textContent = doctors.length;
+      document.getElementById('docBadge').textContent = `${doctors.length} available`;
+
+      const grid = document.getElementById('doctorGrid');
+      grid.innerHTML = '';
+
+      if (!doctors.length) {
+        grid.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><p>No doctors found</p></div>';
+        return;
+      }
+
+      doctors.forEach((doc, i) => {
+        // doc.name is "Smith", "John", "Emily" — display with Dr. prefix
+        const displayName = 'Dr. ' + doc.name;
+        const initials = doc.name.substring(0, 2).toUpperCase();
+        const card = document.createElement('div');
+        card.className = 'doctor-card';
+        card.dataset.docName = doc.name; // store raw name for API calls
+        card.innerHTML = `
+          <div class="doc-av" style="background:${avatarColors[i % avatarColors.length]}">${initials}</div>
+          <div class="doc-info">
+            <div class="doc-name">${displayName}</div>
+            <div class="doc-spec">${doc.specialization}</div>
+          </div>
+          <div class="doc-check" id="chk-${i}"></div>
+        `;
+        card.addEventListener('click', () => selectDoctor(doc, card, i, displayName));
+        grid.appendChild(card);
+      });
+    } catch (e) {
+      document.getElementById('doctorGrid').innerHTML = `
+        <div class="api-error">
+          <div class="err-icon">⚠️</div>
+          <p><strong>Cannot reach server</strong><br/>
+          Make sure Spring Boot is running on <strong>localhost:8080</strong><br/>
+          and <code>@CrossOrigin(origins="*")</code> is set.</p>
+        </div>`;
+      document.getElementById('docBadge').textContent = 'offline';
+    }
+  }
+
+  function selectDoctor(doc, cardEl, idx, displayName) {
+    selectedDoc = doc; // { id, name:"Smith", specialization }
+    document.querySelectorAll('.doctor-card').forEach((c, i) => {
+      c.classList.remove('selected');
+      const chk = document.getElementById(`chk-${i}`);
+      if (chk) chk.textContent = '';
+    });
+    cardEl.classList.add('selected');
+    const chk = document.getElementById(`chk-${idx}`);
+    if (chk) chk.textContent = '✓';
+    const display = document.getElementById('selDocDisplay');
+    display.textContent = `${displayName} — ${doc.specialization}`;
+    display.classList.add('has-doctor');
+  }
+
+  // ── LOAD APPOINTMENTS ──
+  async function loadAppointments() {
+    try {
+      // Use the patient-specific endpoint
+      const res = await fetch(`${API}/patientAppointments/${encodeURIComponent(patientName)}`);
+      if (!res.ok) throw new Error();
+      const appts = await res.json();
+      renderAppointments(appts);
+    } catch (e) {
+      // Fallback: fetch all and filter client-side
+      try {
+        const res2 = await fetch(`${API}/appointments`);
+        const all = await res2.json();
+        const mine = all.filter(a => a.patientName && a.patientName.toLowerCase() === patientName.toLowerCase());
+        renderAppointments(mine);
+      } catch (e2) {
+        document.getElementById('apptList').innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><p>Could not load appointments</p></div>`;
+      }
+    }
+  }
+
+  function renderAppointments(appts) {
+    // Only show appointments that are NOT done (prescription not yet issued)
+    const activeAppts = appts.filter(a => a.status !== 'done');
+    document.getElementById('statTotal').textContent = activeAppts.length;
+    document.getElementById('statUpcoming').textContent = activeAppts.filter(a => a.date >= todayStr).length;
+    document.getElementById('apptBadge').textContent = `${activeAppts.length} active`;
+
+    const list = document.getElementById('apptList');
+    if (!activeAppts.length) {
+      list.innerHTML = `<div class="empty-state"><div class="empty-icon">📋</div><p>No active appointments.<br/>Book a new one below!</p></div>`;
+      return;
+    }
+
+    list.innerHTML = '';
+    [...activeAppts].sort((a,b) => a.date > b.date ? 1 : -1).forEach((a, i) => {
+      const isToday = a.date === todayStr;
+      const isPast  = a.date < todayStr;
+      const statusClass = isToday ? 'today' : isPast ? 'completed' : 'upcoming';
+      const statusLabel = isToday ? 'Today'  : isPast ? 'Visited'  : 'Upcoming';
+      const d = new Date(a.date + 'T00:00:00');
+      const fmt = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+
+      const div = document.createElement('div');
+      div.className = 'appt-item';
+      div.style.animationDelay = `${i * 0.06}s`;
+      div.innerHTML = `
+        <div class="appt-dot"></div>
+        <div class="appt-info">
+          <div class="appt-doctor">Dr. ${a.doctorName}</div>
+          <div class="appt-date">📅 ${fmt}</div>
+        </div>
+        <span class="appt-status ${statusClass}">${statusLabel}</span>
+      `;
+      list.appendChild(div);
+    });
+  }
+
+  // ── BOOK APPOINTMENT ──
+  document.getElementById('bookBtn').addEventListener('click', async () => {
+    const date = document.getElementById('apptDate').value;
+    if (!selectedDoc) { showToast('Please select a doctor first', true); return; }
+    if (!date) { showToast('Please pick a date', true); return; }
+
+    document.getElementById('bookBtn').disabled = true;
+    document.getElementById('bookBtn').textContent = 'Booking…';
+
+    try {
+      // Register patient (backend ignores duplicates)
+      await fetch(`${API}/patients`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: patientName, email: patientName.toLowerCase().replace(/\s+/g, '.') + '@patient.com' })
+      });
+
+      // Book appointment — send status:"active" explicitly so backend filter works
+      const res = await fetch(`${API}/appointments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ patientName, doctorName: selectedDoc.name, date, status: 'active' })
+      });
+
+      if (res.ok || res.status === 200) {
+        showToast(`Appointment booked with Dr. ${selectedDoc.name} on ${date}!`);
+        await loadAppointments();
+      } else {
+        showToast('Booking failed — please try again', true);
+      }
+    } catch (e) {
+      showToast('Server not reachable. Is Spring Boot running?', true);
+    } finally {
+      document.getElementById('bookBtn').disabled = false;
+      document.getElementById('bookBtn').textContent = 'Confirm Appointment →';
+    }
+  });
+
+  // ── INIT ──
+  loadDoctors();
+  loadAppointments();
+  loadPrescriptions();
+
+  // ── LOAD PRESCRIPTIONS ──
+  async function loadPrescriptions() {
+    try {
+      const res = await fetch(`${API}/patientPrescriptions/${encodeURIComponent(patientName)}`);
+      if (!res.ok) throw new Error();
+      const rxList = await res.json();
+      renderPrescriptions(rxList);
+    } catch(e) {
+      document.getElementById('rxGrid').innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">⚠️</div><p>Could not load prescriptions.</p></div>`;
+    }
+  }
+
+  function renderPrescriptions(rxList) {
+    document.getElementById('statRx').textContent = rxList.length;
+    document.getElementById('rxBadge').textContent = `${rxList.length} prescription${rxList.length !== 1 ? 's' : ''}`;
+    const grid = document.getElementById('rxGrid');
+
+    if (!rxList.length) {
+      grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">💊</div><p>No prescriptions yet.<br/>They will appear here once your doctor issues one.</p></div>`;
+      return;
+    }
+
+    grid.innerHTML = '';
+    rxList.forEach((rx, i) => {
+      const div = document.createElement('div');
+      div.className = 'rx-card';
+      div.style.animationDelay = `${i * 0.07}s`;
+      div.innerHTML = `
+        <div class="rx-card-top">
+          <div>
+            <div class="rx-card-doctor">Dr. ${rx.doctorName}</div>
+            <div class="rx-card-date">📅 ${rx.date || 'Recently issued'}</div>
+          </div>
+          <span class="rx-new-badge">💊 Prescription</span>
+        </div>
+        <div class="rx-diag">🔬 ${rx.diagnosis}</div>
+        <div class="rx-meds-label">Medications</div>
+        <div class="rx-meds">${rx.medicines}</div>
+        ${rx.notes ? `<div class="rx-notes">📝 ${rx.notes}</div>` : ''}
+      `;
+      grid.appendChild(div);
+    });
+  }
+</script>
 </body>
 </html>

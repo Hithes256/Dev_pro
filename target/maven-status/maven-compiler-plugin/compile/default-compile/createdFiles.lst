@@ -4,3 +4,4 @@ com\hospital\HospitalManagementSystemApplication.class
 com\hospital\controller\MainController.class
 com\hospital\service\HospitalService.class
 com\hospital\model\Appointment.class
+com\hospital\model\Prescription.class

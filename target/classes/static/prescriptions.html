@@ -1,38 +1,318 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Prescriptions</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediCore — Prescriptions</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0a1628; --navy-mid: #112240;
+      --teal: #00c9b1; --teal-dark: #00a896; --teal-glow: rgba(0,201,177,0.15);
+      --gold: #f0c040; --gold-glow: rgba(240,192,64,0.15);
+      --red: #ff6b6b; --green: #56d9a0;
+      --white: #f8fafc; --muted: #8892a4; --muted2: #3d4f6b;
+      --border: rgba(255,255,255,0.07); --sidebar-w: 240px;
+    }
+    html, body { height: 100%; background: var(--navy); color: var(--white); font-family: 'DM Sans', sans-serif; }
+
+    .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--navy-mid); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 100; padding: 28px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; padding: 0 24px 28px; border-bottom: 1px solid var(--border); }
+    .brand-icon { width: 36px; height: 36px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 16px rgba(240,192,64,0.4); }
+    .brand-icon svg { width: 18px; height: 18px; fill: var(--navy); }
+    .brand-name { font-family: 'DM Serif Display', serif; font-size: 18px; }
+    .brand-name span { color: var(--gold); }
+    .nav-label { padding: 22px 24px 8px; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted2); }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 24px; margin: 2px 12px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--white); }
+    .nav-item.active { background: var(--gold-glow); color: var(--gold); }
+    .nav-icon { font-size: 15px; width: 20px; text-align: center; }
+    .sidebar-footer { margin-top: auto; padding: 20px 24px; border-top: 1px solid var(--border); }
+    .user-chip { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 1px solid var(--border); }
+    .user-av { width: 32px; height: 32px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+    .user-info { flex: 1; min-width: 0; }
+    .user-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user-role { font-size: 11px; color: var(--gold); }
+    .logout-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; transition: color 0.2s; }
+    .logout-btn:hover { color: var(--red); }
+
+    .main { margin-left: var(--sidebar-w); min-height: 100vh; padding: 36px 40px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .page-header { margin-bottom: 28px; animation: fadeUp 0.5s 0.05s both; }
+    .page-greeting { font-size: 13px; color: var(--gold); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+    .page-title { font-family: 'DM Serif Display', serif; font-size: 30px; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    .card { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 18px; padding: 26px; animation: fadeUp 0.5s 0.1s both; }
+    .card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+    .card-title { font-family: 'DM Serif Display', serif; font-size: 20px; }
+    .badge { font-size: 11px; font-weight: 600; letter-spacing: 1px; padding: 4px 10px; border-radius: 100px; }
+    .badge-gold { background: var(--gold-glow); color: var(--gold); border: 1px solid rgba(240,192,64,0.3); }
+    .badge-teal { background: var(--teal-glow); color: var(--teal); border: 1px solid rgba(0,201,177,0.3); }
+
+    /* Form */
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .field input, .field textarea, .field select {
+      width: 100%; padding: 12px 15px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--white); font-family: 'DM Sans', sans-serif;
+      font-size: 14px; outline: none; transition: all 0.2s; resize: vertical; appearance: none;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--teal); background: rgba(0,201,177,0.04); box-shadow: 0 0 0 3px rgba(0,201,177,0.1); }
+    .field input::placeholder, .field textarea::placeholder { color: var(--muted2); }
+    .field input.error, .field select.error, .field textarea.error { border-color: var(--red) !important; }
+    .field select option { background: var(--navy-mid); }
+    .select-wrap { position: relative; }
+    .select-wrap::after { content: '▾'; position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; font-size: 13px; }
+
+    .btn-submit { width: 100%; padding: 14px; border: none; border-radius: 11px; background: linear-gradient(135deg, var(--teal), var(--teal-dark)); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 6px 20px rgba(0,201,177,0.3); }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,201,177,0.4); }
+    .btn-submit:active { transform: none; }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* Rx card list */
+    .rx-list { display: flex; flex-direction: column; gap: 13px; max-height: 580px; overflow-y: auto; }
+    .rx-list::-webkit-scrollbar { width: 4px; }
+    .rx-list::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 4px; }
+
+    .rx-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 13px; padding: 16px 18px; position: relative; overflow: hidden; transition: background 0.2s; }
+    .rx-card::before { content:''; position:absolute; top:0; left:0; bottom:0; width:3px; background: var(--teal); border-radius: 3px 0 0 3px; }
+    .rx-card:hover { background: rgba(0,201,177,0.04); border-color: rgba(0,201,177,0.2); }
+
+    .rx-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; gap: 10px; }
+    .rx-patient { font-size: 15px; font-weight: 700; }
+    .rx-date { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .rx-doctor-badge { font-size: 11px; padding: 3px 9px; border-radius: 100px; background: var(--gold-glow); color: var(--gold); border: 1px solid rgba(240,192,64,0.25); white-space: nowrap; }
+
+    .rx-diag { font-size: 13px; font-weight: 600; color: var(--teal); margin-bottom: 8px; }
+    .rx-meds-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted2); margin-bottom: 4px; }
+    .rx-meds { font-size: 13px; color: var(--muted); line-height: 1.65; white-space: pre-wrap; }
+    .rx-notes { font-size: 12px; color: var(--muted2); margin-top: 8px; font-style: italic; }
+
+    .empty-state { text-align: center; padding: 44px 16px; color: var(--muted2); }
+    .empty-icon { font-size: 34px; margin-bottom: 10px; opacity: 0.5; }
+    .empty-state p { font-size: 13px; }
+
+    .toast { position: fixed; bottom: 28px; right: 28px; background: var(--navy-mid); border: 1px solid var(--teal); color: var(--white); padding: 14px 20px; border-radius: 12px; font-size: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 10px; transform: translateY(24px); opacity: 0; transition: all 0.35s cubic-bezier(.22,1,.36,1); z-index: 999; }
+    .toast.show { transform: none; opacity: 1; }
+    .toast.err { border-color: var(--red); }
+  </style>
 </head>
 <body>
 
-<div class="header">
-    <div>Hospital Management</div>
-    <div>Doctor | Logout</div>
+<div class="sidebar">
+  <div class="brand">
+    <div class="brand-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14h-2v-4H6v-2h4V7h2v4h4v2h-4v4z"/></svg></div>
+    <div class="brand-name">Medi<span>Core</span></div>
+  </div>
+  <div class="nav-label">Navigation</div>
+  <a class="nav-item" href="doctor-dashboard.html"><span class="nav-icon">🏥</span>Dashboard</a>
+  <a class="nav-item" href="patients.html"><span class="nav-icon">👥</span>Patients</a>
+  <a class="nav-item active" href="#"><span class="nav-icon">💊</span>Prescriptions</a>
+  <div class="sidebar-footer">
+    <div class="user-chip">
+      <div class="user-av" id="sidebarAv">D</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebarName">Doctor</div>
+        <div class="user-role">Physician</div>
+      </div>
+      <button class="logout-btn" onclick="logout()">⏻</button>
+    </div>
+  </div>
 </div>
 
-<div class="container">
+<div class="main">
+  <div class="page-header">
+    <div class="page-greeting">Medical Records</div>
+    <h1 class="page-title">Prescriptions</h1>
+  </div>
 
-    <div class="sidebar">
-        <a href="doctor-dashboard.html">Dashboard</a>
-        <a href="patients.html">Patients</a>
-        <a href="#">Prescriptions</a>
-    </div>
+  <div class="grid2">
+    <!-- Create Form -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Issue Prescription</div>
+        <span style="font-size:24px">💊</span>
+      </div>
 
-    <div class="content">
-
-        <div class="card">
-            <h3>Create Prescription</h3>
-
-            <input type="text" placeholder="Patient Name"><br><br>
-            <input type="text" placeholder="Diagnosis"><br><br>
-            <textarea placeholder="Medicines" rows="5" style="width:100%;"></textarea><br><br>
-
-            <button class="btn">Submit</button>
+      <div class="field">
+        <label>Patient</label>
+        <div class="select-wrap">
+          <select id="rxPatient">
+            <option value="">— select patient —</option>
+          </select>
         </div>
+      </div>
 
+      <div class="field">
+        <label>Diagnosis</label>
+        <input type="text" id="rxDiagnosis" placeholder="e.g. Hypertension, Type 2 Diabetes…"/>
+      </div>
+
+      <div class="field">
+        <label>Medications &amp; Instructions</label>
+        <textarea id="rxMeds" rows="5" placeholder="e.g.&#10;• Metformin 500mg — twice daily with meals&#10;• Lisinopril 10mg — once daily in the morning"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Additional Notes (optional)</label>
+        <textarea id="rxNotes" rows="2" placeholder="Follow-up in 4 weeks, avoid alcohol…"></textarea>
+      </div>
+
+      <button class="btn-submit" id="submitBtn" onclick="submitRx()">Issue Prescription →</button>
     </div>
+
+    <!-- Prescriptions issued by this doctor -->
+    <div class="card" style="animation-delay:0.15s">
+      <div class="card-head">
+        <div class="card-title">My Prescriptions</div>
+        <span class="badge badge-gold" id="rxBadge">0 issued</span>
+      </div>
+      <div class="rx-list" id="rxList">
+        <div class="empty-state"><div class="empty-icon">⏳</div><p>Loading…</p></div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<div class="toast" id="toast"><span id="toastIcon">✅</span>&nbsp;<span id="toastMsg">Done</span></div>
+
+<script>
+  const API = 'http://localhost:8089/api';
+  const doctorName = localStorage.getItem('userName') || 'Doctor';
+
+  document.getElementById('sidebarName').textContent = 'Dr. ' + doctorName;
+  document.getElementById('sidebarAv').textContent = doctorName.charAt(0).toUpperCase();
+
+  function logout() { localStorage.clear(); window.location.href = 'login.html'; }
+
+  function showToast(msg, isErr = false) {
+    document.getElementById('toastIcon').textContent = isErr ? '❌' : '✅';
+    document.getElementById('toastMsg').textContent = msg;
+    const t = document.getElementById('toast');
+    t.classList.toggle('err', isErr);
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  // Read ?patient= from URL (set when clicking Prescribe on dashboard)
+  const urlPatient = decodeURIComponent(new URLSearchParams(window.location.search).get('patient') || '');
+
+  // Load patient dropdown from backend, then auto-select if URL param present
+  async function loadPatients() {
+    try {
+      const res = await fetch(`${API}/patients`);
+      const patients = await res.json();
+      const sel = document.getElementById('rxPatient');
+      sel.innerHTML = '<option value="">— select patient —</option>';
+      patients.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.name;
+        opt.textContent = p.name;
+        sel.appendChild(opt);
+      });
+      // Auto-select patient passed from dashboard
+      if (urlPatient) {
+        sel.value = urlPatient;
+        sel.classList.remove('error');
+      }
+    } catch(e) {}
+  }
+
+  // Load prescriptions from backend for this doctor
+  async function loadPrescriptions() {
+    try {
+      const res = await fetch(`${API}/doctorPrescriptions/${encodeURIComponent(doctorName)}`);
+      const rxList = await res.json();
+      renderRx(rxList);
+    } catch(e) {
+      document.getElementById('rxList').innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><p>Could not load prescriptions.<br/>Ensure server is running.</p></div>`;
+    }
+  }
+
+  function renderRx(list) {
+    document.getElementById('rxBadge').textContent = `${list.length} issued`;
+    const container = document.getElementById('rxList');
+    if (!list.length) {
+      container.innerHTML = `<div class="empty-state"><div class="empty-icon">📋</div><p>No prescriptions issued yet.<br/>Use the form to create one.</p></div>`;
+      return;
+    }
+    container.innerHTML = '';
+    [...list].reverse().forEach((rx, i) => {
+      const div = document.createElement('div');
+      div.className = 'rx-card';
+      div.style.animation = `fadeUp 0.4s ${i * 0.06}s both`;
+      div.innerHTML = `
+        <div class="rx-top">
+          <div>
+            <div class="rx-patient">${rx.patientName}</div>
+            <div class="rx-date">${rx.date || 'Today'}</div>
+          </div>
+          <span class="rx-doctor-badge">Dr. ${rx.doctorName}</span>
+        </div>
+        <div class="rx-diag">🔬 ${rx.diagnosis}</div>
+        <div class="rx-meds-label">Medications</div>
+        <div class="rx-meds">${rx.medicines}</div>
+        ${rx.notes ? `<div class="rx-notes">📝 ${rx.notes}</div>` : ''}
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  async function submitRx() {
+    const patientName = document.getElementById('rxPatient').value;
+    const diagnosis   = document.getElementById('rxDiagnosis').value.trim();
+    const medicines   = document.getElementById('rxMeds').value.trim();
+    const notes       = document.getElementById('rxNotes').value.trim();
+
+    // Validate
+    let valid = true;
+    ['rxPatient','rxDiagnosis','rxMeds'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) { el.classList.add('error'); valid = false; }
+      else el.classList.remove('error');
+    });
+    if (!valid) { showToast('Please fill in all required fields', true); return; }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Issuing…';
+
+    try {
+      const today = new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+      const res = await fetch(`${API}/prescriptions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ patientName, doctorName, diagnosis, medicines, notes, date: today })
+      });
+
+      if (res.ok || res.status === 200) {
+        showToast(`Prescription issued for ${patientName} — returning to dashboard…`);
+        await loadPrescriptions();
+        // Redirect back to dashboard after 1.8s so doctor sees updated schedule immediately
+        setTimeout(() => { window.location.href = 'doctor-dashboard.html'; }, 1800);
+      } else {
+        showToast('Server returned an error', true);
+      }
+    } catch(e) {
+      showToast('Cannot reach server. Is Spring Boot running on port 8080?', true);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Issue Prescription →';
+    }
+  }
+
+  // Clear error on input
+  ['rxPatient','rxDiagnosis','rxMeds'].forEach(id => {
+    document.getElementById(id).addEventListener('input', function() { this.classList.remove('error'); });
+    document.getElementById(id).addEventListener('change', function() { this.classList.remove('error'); });
+  });
+
+  loadPatients();
+  loadPrescriptions();
+</script>
 </body>
 </html>

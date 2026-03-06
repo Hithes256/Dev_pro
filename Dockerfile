@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/hospital-management-system-1.0-SNAPSHOT.jar app.jar
 
 # Expose Spring Boot port
-EXPOSE 8085
+EXPOSE 8089
 
 # Run application
 ENTRYPOINT ["java","-jar","app.jar"]
