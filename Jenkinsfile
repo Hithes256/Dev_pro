@@ -31,8 +31,6 @@ pipeline {
             }
             post {
                 always {
-                    // FIX: testNG step requires named parameter 'testResultsPattern'
-                    // not a plain string like testNG '...'
                     testNG reportFilenamePattern: '**/target/surefire-reports/testng-results.xml'
                 }
             }
@@ -70,15 +68,31 @@ pipeline {
         stage('Health Check') {
             steps {
                 echo 'Waiting for Spring Boot to start...'
-                bat "ping -n 16 127.0.0.1 > nul"
-                bat "curl -f http://localhost:${HOST_PORT}/api/doctors"
+                // Wait 30 seconds for Spring Boot to fully start
+                bat "ping -n 31 127.0.0.1 > nul"
+                // Retry curl up to 5 times, 10 seconds apart
+                // If Spring Boot still not up after 30s, retries give extra time
+                retry(5) {
+                    script {
+                        def result = bat(
+                            script: "curl -f http://localhost:${HOST_PORT}/api/doctors",
+                            returnStatus: true
+                        )
+                        if (result != 0) {
+                            // Wait 10 more seconds before next retry
+                            bat "ping -n 11 127.0.0.1 > nul"
+                            error "App not ready yet, retrying..."
+                        }
+                    }
+                }
+                echo "Health check passed! App is up at http://localhost:${HOST_PORT}"
             }
         }
     }
 
     post {
         success {
-            echo "SUCCESS: All tests passed. App running at http://localhost:${HOST_PORT}"
+            echo "SUCCESS: All stages passed. App running at http://localhost:${HOST_PORT}"
         }
         failure {
             echo "FAILED: Pipeline failed. Check the stage logs above."
