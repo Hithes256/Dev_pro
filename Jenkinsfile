@@ -70,7 +70,7 @@ pipeline {
         stage('Health Check') {
             steps {
                 echo 'Waiting for Spring Boot to start...'
-                bat "timeout /t 15 /nobreak"
+                bat "ping -n 16 127.0.0.1 > nul"
                 bat "curl -f http://localhost:${HOST_PORT}/api/doctors"
             }
         }
