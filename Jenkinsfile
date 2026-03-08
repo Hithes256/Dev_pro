@@ -33,7 +33,7 @@ pipeline {
                 always {
                     // FIX: testNG step requires named parameter 'testResultsPattern'
                     // not a plain string like testNG '...'
-                    testNG testResultsPattern: '**/target/surefire-reports/testng-results.xml'
+                    testNG reportFilenamePattern: '**/target/surefire-reports/testng-results.xml'
                 }
             }
         }
