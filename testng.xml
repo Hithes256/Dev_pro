@@ -1,8 +1,11 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Hospital Test Suite">
-    <test name="Patient Service Test">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.1.dtd">
+
+<suite name="Hospital Management Test Suite" verbose="1">
+
+    <test name="Hospital Service Tests">
         <classes>
-            <class name="com.hospital.PatientServiceTest"/>
+            <class name="com.hospital.HospitalServiceTest"/>
         </classes>
     </test>
+
 </suite>

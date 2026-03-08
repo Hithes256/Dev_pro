@@ -1,0 +1,175 @@
+<html>
+<head>
+<title>TestNG:  Hospital Service Tests</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Hospital Service Tests</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>19/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Sun Mar 08 18:57:48 IST 2026</td>
+</tr>
+<tr><td>Total time:</td><td>0 seconds (100 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testGetPatientPrescriptions()'><b>testGetPatientPrescriptions</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: getPatientPrescriptions should return only that patient's prescriptions</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testDoctorNamesAreCorrect()'><b>testDoctorNamesAreCorrect</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: Default doctors must be Smith, John and Emily</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testAddMultiplePatients()'><b>testAddMultiplePatients</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: Two different patients should both be stored</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testDefaultDoctorsLoaded()'><b>testDefaultDoctorsLoaded</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: Service should pre-load 3 default doctors on startup</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testAddPatient()'><b>testAddPatient</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: A new patient should be saved successfully</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testGetDoctorAppointments()'><b>testGetDoctorAppointments</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: getDoctorAppointments should return only appointments for that doctor</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testGetDoctorPrescriptions()'><b>testGetDoctorPrescriptions</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: getDoctorPrescriptions should return only that doctor's prescriptions</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testDuplicatePatientNotAdded()'><b>testDuplicatePatientNotAdded</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: Adding the same patient name twice should be ignored</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testIssuePrescription()'><b>testIssuePrescription</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: Issuing a prescription should save it to the prescriptions list</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testPrescriptionsNotSharedBetweenDoctors()'><b>testPrescriptionsNotSharedBetweenDoctors</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: Prescription issued by Smith should not appear under John</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testGetPatientAppointments()'><b>testGetPatientAppointments</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: getPatientAppointments should return only that patient's appointments</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testPrescriptionMarksAppointmentDone()'><b>testPrescriptionMarksAppointmentDone</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: After prescription is issued the appointment status must change to done</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testBookAppointment()'><b>testBookAppointment</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: A booked appointment should appear in the appointments list</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testDoctorWithNoPrescriptionsReturnsEmpty()'><b>testDoctorWithNoPrescriptionsReturnsEmpty</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: Doctor with zero prescriptions should get an empty list not null</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testUnknownPatientReturnsEmptyAppointments()'><b>testUnknownPatientReturnsEmptyAppointments</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: Patient with no appointments should return an empty list not null</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testAppointmentStatusIsActive()'><b>testAppointmentStatusIsActive</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: Appointment status should remain active after booking</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testDoctorCannotSeeOtherDoctorAppointments()'><b>testDoctorCannotSeeOtherDoctorAppointments</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: Doctor should not see appointments booked with another doctor</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testPatientIdIncrementsCorrectly()'><b>testPatientIdIncrementsCorrectly</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: Each new patient should receive a unique incremented ID</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+<tr>
+<td title='com.hospital.HospitalServiceTest.testPatientIdAutoAssigned()'><b>testPatientIdAutoAssigned</b><br>Test class: com.hospital.HospitalServiceTest<br>Test method: Patient ID should be auto-assigned starting from 1</td>
+<td></td>
+<td>0</td>
+<td>com.hospital.HospitalServiceTest@1ff4931d</td></tr>
+</table><p>
+</body>
+</html>

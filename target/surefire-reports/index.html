@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <meta charset='utf-8'>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
+    <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
+      <br/>
+      <span class="top-banner-font-1">1 suite</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" title="Collapse/expand all the suites" class="collapse-all-link">
+          <img src="collapseall.gif" class="collapse-all-icon">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" panel-name="suite-Hospital_Management_Test_Suite" class="navigator-link">
+              <span class="suite-name border-passed">Hospital Management Test Suite</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" panel-name="test-xml-Hospital_Management_Test_Suite" class="navigator-link ">
+                    <span>C:\Users\Hithesh\OneDrive\Desktop\Dev_Pro\hospital-management-system\testng.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="testlist-Hospital_Management_Test_Suite" class="navigator-link ">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="group-Hospital_Management_Test_Suite" class="navigator-link ">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="times-Hospital_Management_Test_Suite" class="navigator-link ">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="reporter-Hospital_Management_Test_Suite" class="navigator-link ">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="ignored-methods-Hospital_Management_Test_Suite" class="navigator-link ">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="chronological-Hospital_Management_Test_Suite" class="navigator-link ">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">19 methods,   19 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Hospital_Management_Test_Suite" class="hide-methods passed suite-Hospital_Management_Test_Suite"> (hide)</a> <!-- hide-methods passed suite-Hospital_Management_Test_Suite -->
+                      <a href="#" panel-name="suite-Hospital_Management_Test_Suite" class="show-methods passed suite-Hospital_Management_Test_Suite"> (show)</a> <!-- show-methods passed suite-Hospital_Management_Test_Suite -->
+                    </span>
+                    <div class="method-list-content passed suite-Hospital_Management_Test_Suite">
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testAddMultiplePatients">testAddMultiplePatients</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testAddPatient">testAddPatient</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testAppointmentStatusIsActive">testAppointmentStatusIsActive</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testBookAppointment">testBookAppointment</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testDefaultDoctorsLoaded">testDefaultDoctorsLoaded</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testDoctorCannotSeeOtherDoctorAppointments">testDoctorCannotSeeOtherDoctorAppointments</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testDoctorNamesAreCorrect">testDoctorNamesAreCorrect</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testDoctorWithNoPrescriptionsReturnsEmpty">testDoctorWithNoPrescriptionsReturnsEmpty</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testDuplicatePatientNotAdded">testDuplicatePatientNotAdded</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testGetDoctorAppointments">testGetDoctorAppointments</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testGetDoctorPrescriptions">testGetDoctorPrescriptions</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testGetPatientAppointments">testGetPatientAppointments</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testGetPatientPrescriptions">testGetPatientPrescriptions</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testIssuePrescription">testIssuePrescription</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testPatientIdAutoAssigned">testPatientIdAutoAssigned</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testPatientIdIncrementsCorrectly">testPatientIdIncrementsCorrectly</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testPrescriptionMarksAppointmentDone">testPrescriptionMarksAppointmentDone</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testPrescriptionsNotSharedBetweenDoctors">testPrescriptionsNotSharedBetweenDoctors</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Hospital_Management_Test_Suite" title="com.hospital.HospitalServiceTest" class="method navigator-link" hash-for-method="testUnknownPatientReturnsEmptyAppointments">testUnknownPatientReturnsEmptyAppointments</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Hospital_Management_Test_Suite -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Hospital_Management_Test_Suite" class="panel Hospital_Management_Test_Suite">
+          <div class="suite-Hospital_Management_Test_Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.hospital.HospitalServiceTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testAddMultiplePatients">
+                  </a> <!-- testAddMultiplePatients -->
+                  <span class="method-name">testAddMultiplePatients</span>
+                  <em>
+(Two different patients should both be stored)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testAddPatient">
+                  </a> <!-- testAddPatient -->
+                  <span class="method-name">testAddPatient</span>
+                  <em>
+(A new patient should be saved successfully)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testAppointmentStatusIsActive">
+                  </a> <!-- testAppointmentStatusIsActive -->
+                  <span class="method-name">testAppointmentStatusIsActive</span>
+                  <em>
+(Appointment status should remain active after booking)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testBookAppointment">
+                  </a> <!-- testBookAppointment -->
+                  <span class="method-name">testBookAppointment</span>
+                  <em>
+(A booked appointment should appear in the appointments list)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testDefaultDoctorsLoaded">
+                  </a> <!-- testDefaultDoctorsLoaded -->
+                  <span class="method-name">testDefaultDoctorsLoaded</span>
+                  <em>
+(Service should pre-load 3 default doctors on startup)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testDoctorCannotSeeOtherDoctorAppointments">
+                  </a> <!-- testDoctorCannotSeeOtherDoctorAppointments -->
+                  <span class="method-name">testDoctorCannotSeeOtherDoctorAppointments</span>
+                  <em>
+(Doctor should not see appointments booked with another doctor)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testDoctorNamesAreCorrect">
+                  </a> <!-- testDoctorNamesAreCorrect -->
+                  <span class="method-name">testDoctorNamesAreCorrect</span>
+                  <em>
+(Default doctors must be Smith, John and Emily)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testDoctorWithNoPrescriptionsReturnsEmpty">
+                  </a> <!-- testDoctorWithNoPrescriptionsReturnsEmpty -->
+                  <span class="method-name">testDoctorWithNoPrescriptionsReturnsEmpty</span>
+                  <em>
+(Doctor with zero prescriptions should get an empty list not null)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testDuplicatePatientNotAdded">
+                  </a> <!-- testDuplicatePatientNotAdded -->
+                  <span class="method-name">testDuplicatePatientNotAdded</span>
+                  <em>
+(Adding the same patient name twice should be ignored)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetDoctorAppointments">
+                  </a> <!-- testGetDoctorAppointments -->
+                  <span class="method-name">testGetDoctorAppointments</span>
+                  <em>
+(getDoctorAppointments should return only appointments for that doctor)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetDoctorPrescriptions">
+                  </a> <!-- testGetDoctorPrescriptions -->
+                  <span class="method-name">testGetDoctorPrescriptions</span>
+                  <em>
+(getDoctorPrescriptions should return only that doctor's prescriptions)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetPatientAppointments">
+                  </a> <!-- testGetPatientAppointments -->
+                  <span class="method-name">testGetPatientAppointments</span>
+                  <em>
+(getPatientAppointments should return only that patient's appointments)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetPatientPrescriptions">
+                  </a> <!-- testGetPatientPrescriptions -->
+                  <span class="method-name">testGetPatientPrescriptions</span>
+                  <em>
+(getPatientPrescriptions should return only that patient's prescriptions)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testIssuePrescription">
+                  </a> <!-- testIssuePrescription -->
+                  <span class="method-name">testIssuePrescription</span>
+                  <em>
+(Issuing a prescription should save it to the prescriptions list)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPatientIdAutoAssigned">
+                  </a> <!-- testPatientIdAutoAssigned -->
+                  <span class="method-name">testPatientIdAutoAssigned</span>
+                  <em>
+(Patient ID should be auto-assigned starting from 1)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPatientIdIncrementsCorrectly">
+                  </a> <!-- testPatientIdIncrementsCorrectly -->
+                  <span class="method-name">testPatientIdIncrementsCorrectly</span>
+                  <em>
+(Each new patient should receive a unique incremented ID)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPrescriptionMarksAppointmentDone">
+                  </a> <!-- testPrescriptionMarksAppointmentDone -->
+                  <span class="method-name">testPrescriptionMarksAppointmentDone</span>
+                  <em>
+(After prescription is issued the appointment status must change to done)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPrescriptionsNotSharedBetweenDoctors">
+                  </a> <!-- testPrescriptionsNotSharedBetweenDoctors -->
+                  <span class="method-name">testPrescriptionsNotSharedBetweenDoctors</span>
+                  <em>
+(Prescription issued by Smith should not appear under John)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testUnknownPatientReturnsEmptyAppointments">
+                  </a> <!-- testUnknownPatientReturnsEmptyAppointments -->
+                  <span class="method-name">testUnknownPatientReturnsEmptyAppointments</span>
+                  <em>
+(Patient with no appointments should return an empty list not null)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Hospital_Management_Test_Suite-class-passed -->
+        </div> <!-- panel Hospital_Management_Test_Suite -->
+        <div panel-name="test-xml-Hospital_Management_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">C:\Users\Hithesh\OneDrive\Desktop\Dev_Pro\hospital-management-system\testng.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite name=&quot;Hospital Management Test Suite&quot; guice-stage=&quot;DEVELOPMENT&quot; verbose=&quot;0&quot;&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;Hospital Service Tests&quot; verbose=&quot;0&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.hospital.HospitalServiceTest&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Hospital Service Tests --&gt;
+&lt;/suite&gt; &lt;!-- Hospital Management Test Suite --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Hospital_Management_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Hospital Management Test Suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Hospital Service Tests (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Hospital_Management_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Hospital Management Test Suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Hospital_Management_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Hospital Management Test Suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Hospital_Management_Test_Suite');
+function tableData_Hospital_Management_Test_Suite() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(19);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'testAddMultiplePatients')
+data.setCell(0, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(0, 3, 7);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'testGetPatientPrescriptions')
+data.setCell(1, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(1, 3, 1);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'testDoctorNamesAreCorrect')
+data.setCell(2, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(2, 3, 1);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'testDefaultDoctorsLoaded')
+data.setCell(3, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(3, 3, 1);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'testAddPatient')
+data.setCell(4, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(4, 3, 1);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'testGetDoctorPrescriptions')
+data.setCell(5, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(5, 3, 1);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'testDuplicatePatientNotAdded')
+data.setCell(6, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(6, 3, 1);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'testPrescriptionsNotSharedBetweenDoctors')
+data.setCell(7, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(7, 3, 1);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'testGetPatientAppointments')
+data.setCell(8, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(8, 3, 1);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'testBookAppointment')
+data.setCell(9, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(9, 3, 1);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'testDoctorWithNoPrescriptionsReturnsEmpty')
+data.setCell(10, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(10, 3, 1);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'testAppointmentStatusIsActive')
+data.setCell(11, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(11, 3, 1);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'testDoctorCannotSeeOtherDoctorAppointments')
+data.setCell(12, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(12, 3, 1);
+data.setCell(13, 0, 13)
+data.setCell(13, 1, 'testPatientIdIncrementsCorrectly')
+data.setCell(13, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(13, 3, 1);
+data.setCell(14, 0, 14)
+data.setCell(14, 1, 'testGetDoctorAppointments')
+data.setCell(14, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(14, 3, 0);
+data.setCell(15, 0, 15)
+data.setCell(15, 1, 'testIssuePrescription')
+data.setCell(15, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(15, 3, 0);
+data.setCell(16, 0, 16)
+data.setCell(16, 1, 'testPrescriptionMarksAppointmentDone')
+data.setCell(16, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(16, 3, 0);
+data.setCell(17, 0, 17)
+data.setCell(17, 1, 'testUnknownPatientReturnsEmptyAppointments')
+data.setCell(17, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(17, 3, 0);
+data.setCell(18, 0, 18)
+data.setCell(18, 1, 'testPatientIdAutoAssigned')
+data.setCell(18, 2, 'com.hospital.HospitalServiceTest')
+data.setCell(18, 3, 0);
+window.suiteTableData['Hospital_Management_Test_Suite']= { tableData: data, tableDiv: 'times-div-Hospital_Management_Test_Suite'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 20 ms</span>
+              <div id="times-div-Hospital_Management_Test_Suite">
+              </div> <!-- times-div-Hospital_Management_Test_Suite -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Hospital_Management_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Hospital Management Test Suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Hospital_Management_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Hospital_Management_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.hospital.HospitalServiceTest</div> <!-- chronological-class-name -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testAddMultiplePatients</span>
+                <span class="method-start">12 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">24 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testAddPatient</span>
+                <span class="method-start">24 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">26 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testAppointmentStatusIsActive</span>
+                <span class="method-start">26 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">27 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testBookAppointment</span>
+                <span class="method-start">27 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testDefaultDoctorsLoaded</span>
+                <span class="method-start">29 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">29 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testDoctorCannotSeeOtherDoctorAppointments</span>
+                <span class="method-start">31 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">31 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">33 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testDoctorNamesAreCorrect</span>
+                <span class="method-start">34 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">36 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testDoctorWithNoPrescriptionsReturnsEmpty</span>
+                <span class="method-start">37 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testDuplicatePatientNotAdded</span>
+                <span class="method-start">39 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">39 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">40 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetDoctorAppointments</span>
+                <span class="method-start">41 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">42 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetDoctorPrescriptions</span>
+                <span class="method-start">43 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testGetPatientAppointments</span>
+                <span class="method-start">45 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">45 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">46 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetPatientPrescriptions</span>
+                <span class="method-start">47 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">49 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testIssuePrescription</span>
+                <span class="method-start">50 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">51 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPatientIdAutoAssigned</span>
+                <span class="method-start">52 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">53 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPatientIdIncrementsCorrectly</span>
+                <span class="method-start">53 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">54 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPrescriptionsNotSharedBetweenDoctors</span>
+                <span class="method-start">55 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testPrescriptionMarksAppointmentDone</span>
+                <span class="method-start">55 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">55 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">56 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testUnknownPatientReturnsEmptyAppointments</span>
+                <span class="method-start">57 ms</span>
+              </div> <!-- test-method -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+<script type="text/javascript" src="testng-reports2.js"></script>
+</html>

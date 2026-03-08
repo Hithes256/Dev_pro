@@ -1,21 +1,24 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.hospital</groupId>
-    <artifactId>hospital-management-system</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
-    <name>hospital-management-system</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.5</version>
+        <relativePath/>
     </parent>
+
+    <groupId>com.hospital</groupId>
+    <artifactId>hospital-management-system</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>hospital-management-system</name>
+    <description>Hospital Management System with Spring Boot, TestNG, Docker and Jenkins</description>
 
     <properties>
         <java.version>17</java.version>
@@ -29,18 +32,15 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- TestNG -->
+        <!--
+            TestNG 7.9.0 — works with surefire-testng 3.1.2 below.
+            Do NOT add spring-boot-starter-test — it pulls JUnit which
+            conflicts with TestNG and causes Surefire to pick the wrong provider.
+        -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.9.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Spring Boot Test -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -55,16 +55,28 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- Surefire Plugin for TestNG -->
+            <!--
+                Maven Surefire 3.1.2 + surefire-testng 3.1.2 is the last
+                version proven compatible with TestNG 7.9.0.
+                surefire-testng 3.2.x introduced the XmlSuite.setParsed()
+                call that crashes with TestNG 7.x.
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
+                <version>3.1.2</version>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-testng</artifactId>
+                        <version>3.1.2</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
         </plugins>
