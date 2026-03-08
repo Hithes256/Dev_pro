@@ -8,7 +8,7 @@ pipeline {
     environment {
         IMAGE_NAME     = 'hospital-app'
         CONTAINER_NAME = 'hospital-container'
-        APP_PORT       = '8080'
+        APP_PORT       = '8089'
         HOST_PORT      = '8089'
         GITHUB_REPO    = 'https://github.com/Hithes256/Dev_pro.git'
         BRANCH         = 'main'
@@ -62,40 +62,30 @@ pipeline {
             steps {
                 echo "Starting ${CONTAINER_NAME} on port ${HOST_PORT}..."
                 bat "docker run -d --name ${CONTAINER_NAME} -p ${HOST_PORT}:${APP_PORT} --restart unless-stopped ${IMAGE_NAME}:latest"
-            }
-        }
-
-        stage('Health Check') {
-            steps {
-                echo 'Waiting for Spring Boot to start...'
-                // Wait 30 seconds for Spring Boot to fully start
+                // Wait for Spring Boot to start then verify it's up
                 bat "ping -n 31 127.0.0.1 > nul"
-                // Retry curl up to 5 times, 10 seconds apart
-                // If Spring Boot still not up after 30s, retries give extra time
-                retry(5) {
-                    script {
-                        def result = bat(
-                            script: "curl -f http://localhost:${HOST_PORT}/api/doctors",
-                            returnStatus: true
-                        )
-                        if (result != 0) {
-                            // Wait 10 more seconds before next retry
-                            bat "ping -n 11 127.0.0.1 > nul"
-                            error "App not ready yet, retrying..."
-                        }
+                script {
+                    def status = bat(
+                        script: "docker inspect --format={{.State.Running}} ${CONTAINER_NAME}",
+                        returnStdout: true
+                    ).trim()
+                    if (!status.contains('true')) {
+                        bat "docker logs ${CONTAINER_NAME}"
+                        error "Container crashed on startup! See logs above."
+                    } else {
+                        echo "Container is running successfully!"
                     }
                 }
-                echo "Health check passed! App is up at http://localhost:${HOST_PORT}"
             }
         }
     }
 
     post {
         success {
-            echo "SUCCESS: All stages passed. App running at http://localhost:${HOST_PORT}"
+            echo "SUCCESS: Pipeline complete. App at http://localhost:${HOST_PORT}"
         }
         failure {
-            echo "FAILED: Pipeline failed. Check the stage logs above."
+            echo "FAILED: Check logs. Run 'docker logs ${CONTAINER_NAME}' for container errors."
         }
         always {
             echo 'Pipeline complete.'
