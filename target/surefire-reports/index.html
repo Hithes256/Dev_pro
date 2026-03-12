@@ -443,69 +443,69 @@ data.addRows(19);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'testAddMultiplePatients')
 data.setCell(0, 2, 'com.hospital.HospitalServiceTest')
-data.setCell(0, 3, 7);
+data.setCell(0, 3, 6);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'testGetPatientPrescriptions')
+data.setCell(1, 1, 'testDoctorNamesAreCorrect')
 data.setCell(1, 2, 'com.hospital.HospitalServiceTest')
-data.setCell(1, 3, 1);
+data.setCell(1, 3, 2);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'testDoctorNamesAreCorrect')
+data.setCell(2, 1, 'testGetPatientPrescriptions')
 data.setCell(2, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(2, 3, 1);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'testDefaultDoctorsLoaded')
+data.setCell(3, 1, 'testGetDoctorPrescriptions')
 data.setCell(3, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(3, 3, 1);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'testAddPatient')
+data.setCell(4, 1, 'testDuplicatePatientNotAdded')
 data.setCell(4, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(4, 3, 1);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'testGetDoctorPrescriptions')
+data.setCell(5, 1, 'testIssuePrescription')
 data.setCell(5, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(5, 3, 1);
 data.setCell(6, 0, 6)
-data.setCell(6, 1, 'testDuplicatePatientNotAdded')
+data.setCell(6, 1, 'testPrescriptionsNotSharedBetweenDoctors')
 data.setCell(6, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(6, 3, 1);
 data.setCell(7, 0, 7)
-data.setCell(7, 1, 'testPrescriptionsNotSharedBetweenDoctors')
+data.setCell(7, 1, 'testGetPatientAppointments')
 data.setCell(7, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(7, 3, 1);
 data.setCell(8, 0, 8)
-data.setCell(8, 1, 'testGetPatientAppointments')
+data.setCell(8, 1, 'testDoctorWithNoPrescriptionsReturnsEmpty')
 data.setCell(8, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(8, 3, 1);
 data.setCell(9, 0, 9)
-data.setCell(9, 1, 'testBookAppointment')
+data.setCell(9, 1, 'testDoctorCannotSeeOtherDoctorAppointments')
 data.setCell(9, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(9, 3, 1);
 data.setCell(10, 0, 10)
-data.setCell(10, 1, 'testDoctorWithNoPrescriptionsReturnsEmpty')
+data.setCell(10, 1, 'testPatientIdIncrementsCorrectly')
 data.setCell(10, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(10, 3, 1);
 data.setCell(11, 0, 11)
-data.setCell(11, 1, 'testAppointmentStatusIsActive')
+data.setCell(11, 1, 'testPatientIdAutoAssigned')
 data.setCell(11, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(11, 3, 1);
 data.setCell(12, 0, 12)
-data.setCell(12, 1, 'testDoctorCannotSeeOtherDoctorAppointments')
+data.setCell(12, 1, 'testDefaultDoctorsLoaded')
 data.setCell(12, 2, 'com.hospital.HospitalServiceTest')
-data.setCell(12, 3, 1);
+data.setCell(12, 3, 0);
 data.setCell(13, 0, 13)
-data.setCell(13, 1, 'testPatientIdIncrementsCorrectly')
+data.setCell(13, 1, 'testAddPatient')
 data.setCell(13, 2, 'com.hospital.HospitalServiceTest')
-data.setCell(13, 3, 1);
+data.setCell(13, 3, 0);
 data.setCell(14, 0, 14)
 data.setCell(14, 1, 'testGetDoctorAppointments')
 data.setCell(14, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(14, 3, 0);
 data.setCell(15, 0, 15)
-data.setCell(15, 1, 'testIssuePrescription')
+data.setCell(15, 1, 'testPrescriptionMarksAppointmentDone')
 data.setCell(15, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(15, 3, 0);
 data.setCell(16, 0, 16)
-data.setCell(16, 1, 'testPrescriptionMarksAppointmentDone')
+data.setCell(16, 1, 'testBookAppointment')
 data.setCell(16, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(16, 3, 0);
 data.setCell(17, 0, 17)
@@ -513,14 +513,14 @@ data.setCell(17, 1, 'testUnknownPatientReturnsEmptyAppointments')
 data.setCell(17, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(17, 3, 0);
 data.setCell(18, 0, 18)
-data.setCell(18, 1, 'testPatientIdAutoAssigned')
+data.setCell(18, 1, 'testAppointmentStatusIsActive')
 data.setCell(18, 2, 'com.hospital.HospitalServiceTest')
 data.setCell(18, 3, 0);
 window.suiteTableData['Hospital_Management_Test_Suite']= { tableData: data, tableDiv: 'times-div-Hospital_Management_Test_Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 20 ms</span>
+              <span class="suite-total-time">Total running time: 18 ms</span>
               <div id="times-div-Hospital_Management_Test_Suite">
               </div> <!-- times-div-Hospital_Management_Test_Suite -->
             </div> <!-- times-div -->
@@ -553,151 +553,151 @@ return data;
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testAddMultiplePatients</span>
-                <span class="method-start">12 ms</span>
+                <span class="method-start">13 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">24 ms</span>
+                <span class="method-start">22 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testAddPatient</span>
-                <span class="method-start">24 ms</span>
+                <span class="method-start">23 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">26 ms</span>
+                <span class="method-start">24 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testAppointmentStatusIsActive</span>
-                <span class="method-start">26 ms</span>
+                <span class="method-start">25 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">27 ms</span>
+                <span class="method-start">26 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testBookAppointment</span>
                 <span class="method-start">27 ms</span>
               </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">28 ms</span>
+              </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testDefaultDoctorsLoaded</span>
                 <span class="method-start">29 ms</span>
               </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">29 ms</span>
-              </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testDoctorCannotSeeOtherDoctorAppointments</span>
-                <span class="method-start">31 ms</span>
+                <span class="method-start">30 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">31 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">33 ms</span>
+                <span class="method-start">30 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testDoctorNamesAreCorrect</span>
-                <span class="method-start">34 ms</span>
+                <span class="method-start">32 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">36 ms</span>
+                <span class="method-start">32 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">35 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testDoctorWithNoPrescriptionsReturnsEmpty</span>
-                <span class="method-start">37 ms</span>
+                <span class="method-start">35 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">testDuplicatePatientNotAdded</span>
-                <span class="method-start">39 ms</span>
+                <span class="method-start">37 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">39 ms</span>
+                <span class="method-start">37 ms</span>
               </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">38 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetDoctorAppointments</span>
+                <span class="method-start">39 ms</span>
+              </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
                 <span class="method-start">40 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testGetDoctorAppointments</span>
+                <span class="method-name">testGetDoctorPrescriptions</span>
+                <span class="method-start">40 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testGetPatientAppointments</span>
                 <span class="method-start">41 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">42 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="test-method">
-                <span class="method-name">testGetDoctorPrescriptions</span>
-                <span class="method-start">43 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testGetPatientAppointments</span>
-                <span class="method-start">45 ms</span>
-              </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">45 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">46 ms</span>
+                <span class="method-start">41 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testGetPatientPrescriptions</span>
+                <span class="method-start">43 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">43 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testIssuePrescription</span>
+                <span class="method-start">45 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">45 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPatientIdAutoAssigned</span>
                 <span class="method-start">47 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">47 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">48 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPatientIdIncrementsCorrectly</span>
+                <span class="method-start">48 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
                 <span class="method-start">49 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testIssuePrescription</span>
+                <span class="method-name">testPrescriptionsNotSharedBetweenDoctors</span>
                 <span class="method-start">50 ms</span>
               </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testPrescriptionMarksAppointmentDone</span>
+                <span class="method-start">50 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">50 ms</span>
+              </div> <!-- configuration-method before -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
                 <span class="method-start">51 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testPatientIdAutoAssigned</span>
-                <span class="method-start">52 ms</span>
-              </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">53 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="test-method">
-                <span class="method-name">testPatientIdIncrementsCorrectly</span>
-                <span class="method-start">53 ms</span>
-              </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">54 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="test-method">
-                <span class="method-name">testPrescriptionsNotSharedBetweenDoctors</span>
-                <span class="method-start">55 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testPrescriptionMarksAppointmentDone</span>
-                <span class="method-start">55 ms</span>
-              </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">55 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">56 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="test-method">
                 <span class="method-name">testUnknownPatientReturnsEmptyAppointments</span>
-                <span class="method-start">57 ms</span>
+                <span class="method-start">52 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

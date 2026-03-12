@@ -68,6 +68,10 @@
     .doctor-hint { margin-top: 10px; padding: 10px 14px; background: rgba(240,192,64,0.08); border: 1px solid rgba(240,192,64,0.25); border-radius: 10px; font-size: 12px; color: #f0c040; display: none; line-height: 1.6; }
     .doctor-hint.show { display: block; }
 
+    /* ── NEW: red error box for invalid doctor login ── */
+    .error-msg { margin-top: 10px; padding: 10px 14px; background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.35); border-radius: 10px; font-size: 12px; color: #ff6b6b; display: none; line-height: 1.6; }
+    .error-msg.show { display: block; }
+
     .btn-login { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--teal), var(--teal-dark)); border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700; color: var(--navy); cursor: pointer; margin-top: 10px; transition: all 0.25s; box-shadow: 0 8px 24px rgba(0,201,177,0.3); }
     .btn-login:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,201,177,0.4); }
     .btn-login:active { transform: none; }
@@ -117,6 +121,11 @@
           💡 Use your registered name exactly:<br/>
           <strong>Smith</strong> (Cardiology) &nbsp;·&nbsp; <strong>John</strong> (Neurology) &nbsp;·&nbsp; <strong>Emily</strong> (Orthopedics)
         </div>
+        <!-- NEW: shown only when an unregistered doctor tries to log in -->
+        <div class="error-msg" id="doctorError">
+          ❌ Access denied. Only registered doctors can log in.<br/>
+          Valid names: <strong>Smith</strong>, <strong>John</strong>, <strong>Emily</strong>
+        </div>
       </div>
 
       <button class="btn-login" id="loginBtn">Sign In →</button>
@@ -133,22 +142,49 @@
     selectedRole = el.dataset.role;
     const isDoc = selectedRole === 'Doctor';
     document.getElementById('doctorHint').classList.toggle('show', isDoc);
+    // Hide error box when switching roles
+    document.getElementById('doctorError').classList.remove('show');
     document.getElementById('username').placeholder = isDoc ? 'e.g. Smith, John, or Emily' : 'Enter your full name';
     document.getElementById('nameLabel').textContent = isDoc ? 'Doctor Name (as registered)' : 'Your Name';
   }
 
+  const VALID_DOCTORS = ['smith', 'john', 'emily'];
+
   document.getElementById('loginBtn').addEventListener('click', () => {
-    const input = document.getElementById('username');
-    const val = input.value.trim();
-    if (!val) { input.classList.add('error'); input.focus(); return; }
+    const input    = document.getElementById('username');
+    const errorBox = document.getElementById('doctorError');
+    const val      = input.value.trim();
+
+    // Clear previous error state
     input.classList.remove('error');
+    errorBox.classList.remove('show');
+
+    // Empty field check
+    if (!val) { input.classList.add('error'); input.focus(); return; }
+
+    // Doctor validation — only Smith, John, Emily allowed
+    if (selectedRole === 'Doctor') {
+      if (!VALID_DOCTORS.includes(val.toLowerCase())) {
+        input.classList.add('error');
+        errorBox.classList.add('show');
+        return; // block navigation
+      }
+    }
+
     localStorage.setItem('userName', val);
     localStorage.setItem('userRole', selectedRole);
     window.location.href = selectedRole === 'Doctor' ? 'doctor-dashboard.html' : 'patient-dashboard.html';
   });
 
-  document.getElementById('username').addEventListener('input', function() { this.classList.remove('error'); });
-  document.getElementById('username').addEventListener('keypress', e => { if (e.key === 'Enter') document.getElementById('loginBtn').click(); });
+  // Clear error as soon as user starts typing again
+  document.getElementById('username').addEventListener('input', function() {
+    this.classList.remove('error');
+    document.getElementById('doctorError').classList.remove('show');
+  });
+
+  document.getElementById('username').addEventListener('keypress', e => {
+    if (e.key === 'Enter') document.getElementById('loginBtn').click();
+  });
 </script>
 </body>
 </html>

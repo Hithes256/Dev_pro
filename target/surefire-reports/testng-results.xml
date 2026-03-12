@@ -2,160 +2,160 @@
 <testng-results ignored="0" total="19" passed="19" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-03-08T18:57:48 IST" name="Hospital Management Test Suite" finished-at="2026-03-08T18:57:48 IST" duration-ms="100">
+  <suite started-at="2026-03-12T12:44:30 IST" name="Hospital Management Test Suite" finished-at="2026-03-12T12:44:30 IST" duration-ms="97">
     <groups>
     </groups>
-    <test started-at="2026-03-08T18:57:48 IST" name="Hospital Service Tests" finished-at="2026-03-08T18:57:48 IST" duration-ms="100">
+    <test started-at="2026-03-12T12:44:30 IST" name="Hospital Service Tests" finished-at="2026-03-12T12:44:30 IST" duration-ms="97">
       <class name="com.hospital.HospitalServiceTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="11" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="12" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testAddMultiplePatients()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testAddMultiplePatients" description="Two different patients should both be stored" finished-at="2026-03-08T18:57:48 IST" duration-ms="7" status="PASS">
+        <test-method signature="testAddMultiplePatients()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testAddMultiplePatients" description="Two different patients should both be stored" finished-at="2026-03-12T12:44:30 IST" duration-ms="6" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testAddMultiplePatients -->
-        <test-method signature="testAddPatient()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testAddPatient" description="A new patient should be saved successfully" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testAddPatient()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testAddPatient" description="A new patient should be saved successfully" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testAddPatient -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testAppointmentStatusIsActive()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testAppointmentStatusIsActive" description="Appointment status should remain active after booking" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method signature="testAppointmentStatusIsActive()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testAppointmentStatusIsActive" description="Appointment status should remain active after booking" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testAppointmentStatusIsActive -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testBookAppointment()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testBookAppointment" description="A booked appointment should appear in the appointments list" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method signature="testBookAppointment()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testBookAppointment" description="A booked appointment should appear in the appointments list" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testBookAppointment -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testDefaultDoctorsLoaded()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testDefaultDoctorsLoaded" description="Service should pre-load 3 default doctors on startup" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method signature="testDefaultDoctorsLoaded()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testDefaultDoctorsLoaded" description="Service should pre-load 3 default doctors on startup" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testDefaultDoctorsLoaded -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDoctorCannotSeeOtherDoctorAppointments()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testDoctorCannotSeeOtherDoctorAppointments" description="Doctor should not see appointments booked with another doctor" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method signature="testDoctorCannotSeeOtherDoctorAppointments()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testDoctorCannotSeeOtherDoctorAppointments" description="Doctor should not see appointments booked with another doctor" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testDoctorCannotSeeOtherDoctorAppointments -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testDoctorNamesAreCorrect()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testDoctorNamesAreCorrect" description="Default doctors must be Smith, John and Emily" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method signature="testDoctorNamesAreCorrect()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testDoctorNamesAreCorrect" description="Default doctors must be Smith, John and Emily" finished-at="2026-03-12T12:44:30 IST" duration-ms="2" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testDoctorNamesAreCorrect -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testDoctorWithNoPrescriptionsReturnsEmpty()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testDoctorWithNoPrescriptionsReturnsEmpty" description="Doctor with zero prescriptions should get an empty list not null" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method signature="testDoctorWithNoPrescriptionsReturnsEmpty()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testDoctorWithNoPrescriptionsReturnsEmpty" description="Doctor with zero prescriptions should get an empty list not null" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testDoctorWithNoPrescriptionsReturnsEmpty -->
-        <test-method signature="testDuplicatePatientNotAdded()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testDuplicatePatientNotAdded" description="Adding the same patient name twice should be ignored" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testDuplicatePatientNotAdded()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testDuplicatePatientNotAdded" description="Adding the same patient name twice should be ignored" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testDuplicatePatientNotAdded -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testGetDoctorAppointments()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testGetDoctorAppointments" description="getDoctorAppointments should return only appointments for that doctor" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method signature="testGetDoctorAppointments()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testGetDoctorAppointments" description="getDoctorAppointments should return only appointments for that doctor" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGetDoctorAppointments -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetDoctorPrescriptions()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testGetDoctorPrescriptions" description="getDoctorPrescriptions should return only that doctor&#039;s prescriptions" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method signature="testGetDoctorPrescriptions()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testGetDoctorPrescriptions" description="getDoctorPrescriptions should return only that doctor&#039;s prescriptions" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGetDoctorPrescriptions -->
-        <test-method signature="testGetPatientAppointments()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testGetPatientAppointments" description="getPatientAppointments should return only that patient&#039;s appointments" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testGetPatientAppointments()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testGetPatientAppointments" description="getPatientAppointments should return only that patient&#039;s appointments" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGetPatientAppointments -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetPatientPrescriptions()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testGetPatientPrescriptions" description="getPatientPrescriptions should return only that patient&#039;s prescriptions" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method signature="testGetPatientPrescriptions()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testGetPatientPrescriptions" description="getPatientPrescriptions should return only that patient&#039;s prescriptions" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGetPatientPrescriptions -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testIssuePrescription()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testIssuePrescription" description="Issuing a prescription should save it to the prescriptions list" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method signature="testIssuePrescription()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testIssuePrescription" description="Issuing a prescription should save it to the prescriptions list" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testIssuePrescription -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testPatientIdAutoAssigned()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testPatientIdAutoAssigned" description="Patient ID should be auto-assigned starting from 1" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method signature="testPatientIdAutoAssigned()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testPatientIdAutoAssigned" description="Patient ID should be auto-assigned starting from 1" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testPatientIdAutoAssigned -->
-        <test-method signature="testPatientIdIncrementsCorrectly()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testPatientIdIncrementsCorrectly" description="Each new patient should receive a unique incremented ID" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testPatientIdIncrementsCorrectly()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testPatientIdIncrementsCorrectly" description="Each new patient should receive a unique incremented ID" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testPatientIdIncrementsCorrectly -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testPrescriptionsNotSharedBetweenDoctors()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testPrescriptionsNotSharedBetweenDoctors" description="Prescription issued by Smith should not appear under John" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method signature="testPrescriptionsNotSharedBetweenDoctors()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testPrescriptionsNotSharedBetweenDoctors" description="Prescription issued by Smith should not appear under John" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testPrescriptionsNotSharedBetweenDoctors -->
-        <test-method signature="testPrescriptionMarksAppointmentDone()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testPrescriptionMarksAppointmentDone" description="After prescription is issued the appointment status must change to done" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method signature="testPrescriptionMarksAppointmentDone()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testPrescriptionMarksAppointmentDone" description="After prescription is issued the appointment status must change to done" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testPrescriptionMarksAppointmentDone -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="setUp" finished-at="2026-03-08T18:57:48 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="setUp" finished-at="2026-03-12T12:44:30 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testUnknownPatientReturnsEmptyAppointments()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-08T18:57:48 IST" name="testUnknownPatientReturnsEmptyAppointments" description="Patient with no appointments should return an empty list not null" finished-at="2026-03-08T18:57:48 IST" duration-ms="0" status="PASS">
+        <test-method signature="testUnknownPatientReturnsEmptyAppointments()[pri:0, instance:com.hospital.HospitalServiceTest@1ff4931d]" started-at="2026-03-12T12:44:30 IST" name="testUnknownPatientReturnsEmptyAppointments" description="Patient with no appointments should return an empty list not null" finished-at="2026-03-12T12:44:30 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testUnknownPatientReturnsEmptyAppointments -->
