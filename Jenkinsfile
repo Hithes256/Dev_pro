@@ -82,7 +82,7 @@ pipeline {
 
     post {
         success {
-            echo "SUCCESS: Pipeline complete. App at http://localhost:${HOST_PORT}"
+            echo "SUCCESS: Pipeline complete. App at http://localhost:${HOST_PORT}/login.html"
         }
         failure {
             echo "FAILED: Check logs. Run 'docker logs ${CONTAINER_NAME}' for container errors."
